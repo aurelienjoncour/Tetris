@@ -31,7 +31,7 @@ char *my_strlowcase(char *str);
 char *my_strcapitalize(char *str);
 int my_str_isalpha(char const *str);
 int my_str_isalphanum(char const *str);
-int my_str_isnum(char const *str);
+bool my_str_isnum(char const *str);
 int my_str_islower(char const *str);
 int my_str_isupper(char const *str);
 int my_str_isprintable(char const *str);
