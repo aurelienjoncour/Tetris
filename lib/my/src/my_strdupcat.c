@@ -25,7 +25,6 @@ char *my_strdupcat(int argc, ...)
 {
     char *dest;
     va_list vl;
-    va_list vl_count;
     int k = 0;
     char *str;
 
