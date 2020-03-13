@@ -45,5 +45,6 @@ char *my_strdup(char const *src);
 char *my_strndup(char const *src, int n);
 char *my_convert_base(char const *nbr, int base1, int base2);
 char *get_next_line(int fd);
+char *my_strdupcat(int argc, ...);
 
 #endif
