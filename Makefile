@@ -31,8 +31,12 @@ LIGHT_BLUE      =       "\e[94m"
 LIGHT_MAGEN     =       "\e[95m"
 LIGHT_CYAN      =       "\e[96m"
 
-SRC =   src/main.c	\
-		src/tetris.c
+SRC =   src/main.c					\
+		src/tetris.c				\
+		src/flags/get_flags.c		\
+		src/flags/set_game_flags.c	\
+		src/flags/set_keys_arrows.c	\
+		src/flags/set_keys_game.c
 
 OBJ =   $(SRC:.c=.o)
 
