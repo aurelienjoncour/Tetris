@@ -44,6 +44,7 @@ typedef struct flags_s
 int tetris(int argc, char **argv);
 flags_t *get_flags(int argc, char **argv);
 
+void free_flags_struct(flags_t *flags);
 int put_help(char *arg,
             flags_t *flags);
 int set_level(char *arg, flags_t *flags);

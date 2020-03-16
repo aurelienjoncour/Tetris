@@ -80,6 +80,29 @@ static flags_t *init_flags(void)
     return flags;
 }
 
+void free_flags_struct(flags_t *flags)
+{
+    for (int i = 0; flags->left[i] != NULL; i++)
+        free(flags->left[i]);
+    free(flags->left);
+    for (int i = 0; flags->right[i] != NULL; i++)
+        free(flags->right[i]);
+    free(flags->right);
+    for (int i = 0; flags->turn[i] != NULL; i++)
+        free(flags->turn[i]);
+    free(flags->turn);
+    for (int i = 0; flags->drop[i] != NULL; i++)
+        free(flags->drop[i]);
+    free(flags->drop);
+    for (int i = 0; flags->quit[i] != NULL; i++)
+        free(flags->quit[i]);
+    free(flags->quit);
+    for (int i = 0; flags->pause[i] != NULL; i++)
+        free(flags->pause[i]);
+    free(flags->pause);
+    free(flags);
+}
+
 flags_t *get_flags(int argc, char **argv)
 {
     flags_t *flags = init_flags();
