@@ -82,8 +82,9 @@ static flags_t *init_flags(void)
 
 void free_flags_struct(flags_t *flags)
 {
-    for (int i = 0; flags->left[i] != NULL; i++)
-        free(flags->left[i]);
+    if (flags == NULL)
+        return;
+    for (int i = 0; flags->left[i] != NULL; free(flags->left[i]), i++);
     free(flags->left);
     for (int i = 0; flags->right[i] != NULL; i++)
         free(flags->right[i]);
