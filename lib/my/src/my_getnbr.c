@@ -5,6 +5,8 @@
 ** print int from string
 */
 
+#include <stdbool.h>
+
 int my_strlen(char const *str);
 
 static int get_num(char *list, char option)
@@ -13,57 +15,36 @@ static int get_num(char *list, char option)
     int num = 0;
     int n = 0;
 
-    for (int i = my_strlen(list) - 1; i >= 0; i--) {
+    for (int i = my_strlen(list) - 1; i >= 0; i--)
         if (list[i] >= '0' && list[i] <= '9') {
-            num += (list[i] - 48) * power;
+            num += (list[i] - '0') * power;
             power *= 10;
             n++;
         }
-    }
     if (option == 'n')
         return n;
     return num;
-}
-
-static int blacklist_charac(char c)
-{
-    for (int i = 'a'; i <= 'z'; i++)
-        if (i == c)
-            return 1;
-    for (int i = 'A'; i <= 'Z'; i++)
-        if (i == c)
-            return 1;
-    return 0;
 }
 
 static void prepare_list(char const *str, char *list)
 {
     int x = 0;
 
-    for (int i = 0; str[i] != '\0'; i++) {
+    for (int i = 0; str[i] != '\0'; i++)
         if (str[i] >= '0' && str[i] <= '9') {
             list[x] = str[i];
             x++;
             list[x] = '\0';
         }
-        if (blacklist_charac(str[i])) {
-            list[i] = '\0';
-            break;
-        }
-    }
 }
 
-static int is_neg(char const *str)
+static bool is_neg(char const *str)
 {
-    int neg = 0;
+    bool neg = false;
 
     for (int i = 0; str[i] != '\0'; i++)
-        if (str[i] == '-') {
-            if (neg)
-                neg = 0;
-            else
-                neg = 1;
-        }
+        if (str[i] == '-')
+            neg = !neg;
     return neg;
 }
 
