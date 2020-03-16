@@ -49,9 +49,6 @@ all:    $(NAME)
 
 $(NAME):    $(OBJ)
 		@$(ECHO)
-		@for MAKE_PATH in $(LIB_PATHS) ; do \
-			make -C $$MAKE_PATH -s ; \
-		done
 		@make -s -C lib/my --no-print-directory
 		@gcc -o $(NAME) $(OBJ) $(LDFLAGS) \
 		&& $(ECHO) $(BOLD) $(GREEN)"► BUILD SUCCESS !"$(DEFAULT) || $(ECHO) $(BOLD) $(RED)"► BUILD FAILED"$(DEFAULT)
@@ -59,14 +56,12 @@ $(NAME):    $(OBJ)
 clean:
 		@make clean -s -C lib/my --no-print-directory
 		@rm -f $(OBJ)
-		@mr_clean
 		@($(ECHO) $(BOLD) $(GREEN)✓$(LIGHT_BLUE)" CLEAN "$(DEFAULT))
 
 fclean: clean
 		@make fclean -s -C lib/my --no-print-directory
 		@rm -f $(OBJ)
 		@rm -f $(NAME)
-		@mr_clean
 		@($(ECHO) $(BOLD) $(GREEN)✓$(LIGHT_BLUE)" FCLEAN "$(DEFAULT))
 
 re: fclean all
