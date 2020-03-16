@@ -46,15 +46,15 @@ const opt_func_t opt_func[] = {
 
 static char **set_flag_keys(char *value)
 {
-    char **tab = malloc(sizeof(char *) * 2);
+    char **array = malloc(sizeof(char *) * 2);
 
-    if (tab == NULL)
+    if (array == NULL)
         return NULL;
-    tab[1] = NULL;
-    tab[0] = my_strdup(value);
-    if (tab[0] == NULL)
+    array[1] = NULL;
+    array[0] = my_strdup(value);
+    if (array[0] == NULL)
         return NULL;
-    return tab;
+    return array;
 }
 
 static flags_t *init_flags(void)

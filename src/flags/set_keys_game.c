@@ -36,16 +36,16 @@ int set_key_pause(char *arg, flags_t *flags)
 
 int set_map_size(char *arg, flags_t *flags)
 {
-    char **tab = my_str_to_array(arg, "{};, ", false);
+    char **array = my_str_to_array(arg, "{};, ", false);
 
-    if (arg == NULL || tab == NULL)
+    if (arg == NULL || array == NULL)
         return EXIT_ERROR;
     for (int i = 0; i < 2; i++)
-        if (tab[i] == NULL)
+        if (array[i] == NULL)
             return EXIT_ERROR;
-    if (tab[2] != NULL || !my_str_isnum(tab[0]) || !my_str_isnum(tab[1]))
+    if (array[2] != NULL || !my_str_isnum(array[0]) || !my_str_isnum(array[1]))
         return EXIT_ERROR;
-    flags->map_size[0] = my_getnbr(tab[0]);
-    flags->map_size[1] = my_getnbr(tab[1]);
+    flags->map_size[0] = my_getnbr(array[0]);
+    flags->map_size[1] = my_getnbr(array[1]);
     return EXIT_SUCCESS;
 }
