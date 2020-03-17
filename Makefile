@@ -33,6 +33,9 @@ LIGHT_CYAN      =       "\e[96m"
 
 SRC =   src/main.c					\
 		src/tetris.c				\
+		src/tools/word_array.c					\
+		src/tools/allowed_char.c				\
+		src/tools/read_entiere_file.c			\
 		src/flags/get_flags.c		\
 		src/flags/set_game_flags.c	\
 		src/flags/set_keys_arrows.c	\
