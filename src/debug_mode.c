@@ -23,13 +23,13 @@ static void display_tetriminos(tetriminos_t *tetriminos, int nb)
         my_putstr("Tetriminos : Name ");
         my_putstr(tetriminos[i].name);
         my_putstr(" : ");
-        if (tetriminos[i].size.width == 0) {
+        if (tetriminos[i].width == 0) {
             my_putstr("Errror\n");
         } else {
             my_putstr("Size ");
-            my_put_nbr(tetriminos[i].size.width);
+            my_put_nbr(tetriminos[i].width);
             my_putstr("*");
-            my_put_nbr(tetriminos[i].size.height);
+            my_put_nbr(tetriminos[i].height);
             my_putstr(" : Color ");
             my_put_nbr(tetriminos[i].color);
             my_putstr(" :\n");
