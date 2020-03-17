@@ -53,6 +53,7 @@ typedef struct tetriminos {
 typedef struct game {
     tetriminos_t *tetriminos;
     int nb_tetriminos;
+    flags_t *flag;
 } game_t;
 
 int tetris(int argc, char **argv);
@@ -80,5 +81,6 @@ tetriminos_t *tetriminos, size_t i);
 int create_tetriminos(char const *folder, game_t *a);
 void destroy_tetriminos(tetriminos_t *tetriminos, int nb_tetriminos);
 
+int debug_mode(game_t *game);
 
 #endif

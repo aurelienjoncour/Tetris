@@ -43,7 +43,8 @@ SRC =   src/main.c					\
 		src/flags/get_flags.c		\
 		src/flags/set_game_flags.c	\
 		src/flags/set_keys_arrows.c	\
-		src/flags/set_keys_game.c
+		src/flags/set_keys_game.c	 \
+		src/debug_mode.c			\
 
 OBJ =   $(SRC:.c=.o)
 
