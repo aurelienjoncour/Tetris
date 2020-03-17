@@ -13,3 +13,4 @@ test
 unit_tests
 bootstrap.c
 tetris
+.vscode/
