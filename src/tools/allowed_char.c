@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2020
+** PSU_tetris_2019
+** File description:
+** allowed_char
+*/
+
 #include <stdbool.h>
 #include "my.h"
 
