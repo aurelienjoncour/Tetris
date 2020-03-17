@@ -1,0 +1,101 @@
+/*
+** EPITECH PROJECT, 2020
+** PSU_tetris_2019
+** File description:
+** parse_tetriminos
+*/
+
+#include "tetris.h"
+#include "my.h"
+#include "word_array.h"
+
+static void init_error(tetriminos_t *tetriminos, size_t i,
+char const *filename, char **file)
+{
+    free_2d_array(file);
+    tetriminos[i].tetriminos = NULL;
+    tetriminos[i].color = 0;
+    tetriminos[i].width = 0;
+    tetriminos[i].height = 0;
+    tetriminos[i].name = my_strdup(filename);
+    for (size_t j = 0; tetriminos[i].name[j] != '\0'; j++) {
+        if (tetriminos[i].name[j] == '.')
+            tetriminos[i].name[j] = '\0';
+    }
+}
+
+static char **get_tetriminos_files(const char *filename, const char *folder)
+{
+    char *filepath = my_strdupcat(2, folder, filename);
+    char **file = NULL;
+
+    if (filepath == NULL)
+        return NULL;
+    file = read_entiere_file(filepath);
+    free(filepath);
+    if (file == NULL || word_array_len(file) < 2) {
+        free_2d_array(file);
+        return NULL;
+    }
+    return file;
+}
+
+static int get_tetriminos_info(tetriminos_t *tetriminos, size_t i,
+char **file, const char *filename)
+{
+    char **first_line = my_str_to_array(file[0], " ", false);
+
+    if (first_line == NULL || word_array_len(first_line) != 3)
+        return EXIT_ERROR;
+    for (size_t j = 0; j < 3; j++)
+        if (allow_char(first_line[j], "0123456789"))
+            return EXIT_ERROR;
+    tetriminos[i].width = my_getnbr(first_line[0]);
+    tetriminos[i].height = my_getnbr(first_line[1]);
+    tetriminos[i].color = my_getnbr(first_line[2]);
+    free_2d_array(first_line);
+    if (word_array_len(file) - 1 != tetriminos[i].height)
+        return EXIT_ERROR;
+    tetriminos[i].name = my_strdup(filename);
+    if (tetriminos[i].name == NULL)
+        return EXIT_ERROR;
+    for (size_t j = 0; tetriminos[i].name[j] != '\0'; j++)
+        if (my_strcmp(tetriminos[i].name+j, ".tetrimino") == 0)
+            tetriminos[i].name[j] = '\0';
+    return EXIT_SUCCESS;
+}
+
+static int get_tetriminos_shape(tetriminos_t *tetriminos, size_t i,
+char **file)
+{
+    tetriminos[i].tetriminos = malloc(sizeof(char *) *
+    (tetriminos[i].height + 1));
+    if (tetriminos[i].tetriminos == NULL) {
+        return EXIT_ERROR;
+    }
+    for (int j = 0; j < tetriminos[i].height + 1; j++)
+        tetriminos[i].tetriminos[j] = NULL;
+    for (int j = 1; j < word_array_len(file); j++) {
+        tetriminos[i].tetriminos[j - 1] = my_strdup(file[j]);
+        if (tetriminos[i].tetriminos[j - 1] == NULL)
+            return EXIT_ERROR;
+    }
+    return EXIT_SUCCESS;
+}
+
+void parse_tetriminos(const char *filename, const char *folder,
+tetriminos_t *tetriminos, size_t i)
+{
+    char **file = get_tetriminos_files(filename, folder);
+
+    if (file == NULL) {
+        return init_error(tetriminos, i, filename, file);
+    }
+    if (get_tetriminos_info(tetriminos, i, file, filename) == EXIT_ERROR) {
+        return init_error(tetriminos, i, filename, file);
+    }
+    if (get_tetriminos_shape(tetriminos, i, file) == EXIT_ERROR) {
+        return init_error(tetriminos, i, filename, file);
+    }
+    free_2d_array(file);
+}

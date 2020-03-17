@@ -41,6 +41,20 @@ typedef struct flags_s
     bool debug;
 } flags_t;
 
+typedef struct tetriminos {
+    char *name;
+    char **tetriminos;
+    int width;
+    int height;
+    int color;
+
+} tetriminos_t;
+
+typedef struct game {
+    tetriminos_t *tetriminos;
+    int nb_tetriminos;
+} game_t;
+
 int tetris(int argc, char **argv);
 flags_t *get_flags(int argc, char **argv);
 
@@ -56,5 +70,15 @@ int set_key_pause(char *arg, flags_t *flags);
 int set_map_size(char *arg, flags_t *flags);
 int toggle_next(char *arg, flags_t *flags);
 int toggle_debug(char *arg, flags_t *flags);
+
+bool allow_char(char *script, char *allow_char);
+char **read_entiere_file(const char *filepath);
+
+char **get_tetriminos_list(char const *folder);
+void parse_tetriminos(const char *filename, const char *folder,
+tetriminos_t *tetriminos, size_t i);
+int create_tetriminos(char const *folder, game_t *a);
+void destroy_tetriminos(tetriminos_t *tetriminos, int nb_tetriminos);
+
 
 #endif

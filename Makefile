@@ -36,6 +36,10 @@ SRC =   src/main.c					\
 		src/tools/word_array.c					\
 		src/tools/allowed_char.c				\
 		src/tools/read_entiere_file.c			\
+		src/tetriminos/destroy_tetriminos.c		\
+		src/tetriminos/create_tetriminos.c		\
+		src/tetriminos/get_tetriminos_list.c	\
+		src/tetriminos/parse_tetriminos.c		\
 		src/flags/get_flags.c		\
 		src/flags/set_game_flags.c	\
 		src/flags/set_keys_arrows.c	\
