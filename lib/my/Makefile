@@ -36,6 +36,7 @@ SRC	=	src/my_compute_power_rec.c	\
 		src/my_str_to_array.c	\
 		src/my_put_error_str.c	\
 		src/get_next_line.c	\
+		src/my_sort_word_array.c	\
 		src/my_strdupcat.c
 
 OBJ	=	$(SRC:.c=.o)
