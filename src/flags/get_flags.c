@@ -63,10 +63,10 @@ static flags_t *init_flags(void)
 
     if (flags == NULL)
         return NULL;
-    flags->left = set_flag_keys(DEF_LEFT);
-    flags->right = set_flag_keys(DEF_RIGHT);
-    flags->turn = set_flag_keys(DEF_TURN);
-    flags->drop = set_flag_keys(DEF_DROP);
+    flags->left = set_flag_keys(tigetstr(DEF_LEFT));
+    flags->right = set_flag_keys(tigetstr(DEF_RIGHT));
+    flags->turn = set_flag_keys(tigetstr(DEF_TURN));
+    flags->drop = set_flag_keys(tigetstr(DEF_DROP));
     flags->quit = set_flag_keys(DEF_QUIT);
     flags->pause = set_flag_keys(DEF_PAUSE);
     flags->map_size[0] = DEF_ROW;
@@ -105,12 +105,17 @@ void free_flags_struct(flags_t *flags)
     free(flags);
 }
 
-flags_t *get_flags(int argc, char **argv)
+flags_t *get_flags(int argc, char **argv, char **env)
 {
-    flags_t *flags = init_flags();
+    char *term = my_getenv("TERM=", env);
+    flags_t *flags;
     int optsindex;
     int opt = -2;
+    int error;
 
+    if (term == NULL || setupterm(term, 1, &error))
+        return NULL;
+    flags = init_flags();
     if (flags == NULL)
         return NULL;
     while (opt != -1) {

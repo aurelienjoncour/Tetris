@@ -58,10 +58,11 @@ typedef struct game {
     flags_t *flag;
 } game_t;
 
-int tetris(int argc, char **argv);
-bool init_term(struct termios *term_backup);
+int tetris(int argc, char **argv, char **env);
+char *my_getenv(char const *var, char **env);
+bool init_term(struct termios *term_backup, char **env);
 
-flags_t *get_flags(int argc, char **argv);
+flags_t *get_flags(int argc, char **argv, char **env);
 void free_flags_struct(flags_t *flags);
 int put_file(char const *binary);
 int toggle_help(__attribute((unused))char *arg, flags_t *flags);

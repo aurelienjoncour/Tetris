@@ -9,14 +9,6 @@
 #include "my.h"
 #include "tetris.h"
 
-static void display_shape(char **shape)
-{
-    for (size_t i = 0; shape[i] != NULL; i++) {
-        my_putstr(shape[i]);
-        my_putstr("\n");
-    }
-}
-
 static void display_tetriminos(tetriminos_t *tetriminos, int nb)
 {
     for (int i = 0; i < nb; i++) {
@@ -33,31 +25,43 @@ static void display_tetriminos(tetriminos_t *tetriminos, int nb)
             my_putstr(" : Color ");
             my_put_nbr(tetriminos[i].color);
             my_putstr(" :\n");
-            display_shape(tetriminos[i].tetriminos);
+            for (size_t k = 0; tetriminos[i].tetriminos[k] != NULL; k++) {
+                my_putstr(tetriminos[i].tetriminos[k]);
+                my_putstr("\n");
+            }
         }
     }
+}
+
+static void print_key(char *key)
+{
+    if (!my_strcmp(key, " ")) {
+        my_putstr("(space)\n");
+        return;
+    }
+    for (int i = 0; key[i]; i++) {
+        if (key[i] == 27)
+            my_putstr("^E");
+        else
+            my_putchar(key[i]);
+    }
+    my_putchar('\n');
 }
 
 static void display_key(flags_t *flag)
 {
     my_putstr("Key Left : ");
-    my_putstr(flag->left[0]);
-    my_putstr("\n");
+    print_key(flag->left[0]);
     my_putstr("Key Right : ");
-    my_putstr(flag->right[0]);
-    my_putstr("\n");
+    print_key(flag->right[0]);
     my_putstr("Key Turn : ");
-    my_putstr(flag->turn[0]);
-    my_putstr("\n");
+    print_key(flag->turn[0]);
     my_putstr("Key Drop : ");
-    my_putstr(flag->drop[0]);
-    my_putstr("\n");
+    print_key(flag->drop[0]);
     my_putstr("Key Quit : ");
-    my_putstr(flag->quit[0]);
-    my_putstr("\n");
-    my_putstr("Key Pause :");
-    my_putstr(flag->pause[0]);
-    my_putstr("\n");
+    print_key(flag->quit[0]);
+    my_putstr("Key Pause : ");
+    print_key(flag->pause[0]);
 }
 
 static void display_game_info(game_t *game)

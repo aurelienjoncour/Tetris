@@ -8,9 +8,19 @@
 #include "my.h"
 #include "tetris.h"
 
-bool init_term(struct termios *term_backup)
+char *my_getenv(char const *var, char **env)
 {
-    char *term_env = getenv("TERM");
+    int n = my_strlen(var);
+
+    for (int i = 0; env[i]; i++)
+        if (!my_strncmp(var, env[i], n))
+            return env[i] + n;
+    return NULL;
+}
+
+bool init_term(struct termios *term_backup, char **env)
+{
+    char *term_env = my_getenv("TERM=", env);
     struct termios term;
 
     if (term_env == NULL) {

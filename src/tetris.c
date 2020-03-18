@@ -7,24 +7,38 @@
 
 #include "tetris.h"
 
-int tetris(int argc, char **argv)
+static int do_first_flags(char *binary, struct termios *term_backup,
+                        game_t *game, char **env)
+{
+    if (game->flag->help) {
+        free_flags_struct(game->flag);
+        if (put_file(binary) == EXIT_ERROR)
+            return EXIT_ERROR;
+        return -1;
+    }
+    if (init_term(term_backup, env)) {
+        free_flags_struct(game->flag);
+        return EXIT_ERROR;
+    }
+    if (game->flag->debug)
+        debug_mode(game);
+    return EXIT_SUCCESS;
+}
+
+int tetris(int argc, char **argv, char **env)
 {
     game_t game = {};
     struct termios term_backup = {};
+    int exit_value;
 
     create_tetriminos("./tetriminos/", &game);
-    game.flag = get_flags(argc, argv);
+    game.flag = get_flags(argc, argv, env);
     if (game.flag == NULL)
         return EXIT_ERROR;
-    if (game.flag->help)
-        return put_file(argv[0]);
-    if (game.flag->debug)
-        debug_mode(&game);
-    if (init_term(&term_backup)) {
-        free_flags_struct(game.flag);
-        return EXIT_ERROR;
-    }
+    exit_value = do_first_flags(argv[0], &term_backup, &game, env);
+    if (exit_value != EXIT_SUCCESS)
+        return exit_value;
     free_flags_struct(game.flag);
     tcsetattr(0, 0, &term_backup);
-    return EXIT_SUCCESS;
+    return exit_value;
 }
