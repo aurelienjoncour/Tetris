@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "my.h"
+#include "tetris.h"
 
 static off_t get_filesize(const char *filepath)
 {
@@ -19,7 +20,7 @@ static off_t get_filesize(const char *filepath)
     return st.st_size;
 }
 
-static char *get_buffer_map(const char *filepath)
+char *get_buffer_map(char const *filepath)
 {
     int fd = open(filepath, O_RDONLY);
     off_t file_size = get_filesize(filepath);
@@ -48,4 +49,18 @@ char **read_entiere_file(const char *filepath)
     array = my_str_to_array(map, "\n", false);
     free(map);
     return array;
+}
+
+int put_file(char const *binary)
+{
+    char *buffer = get_buffer_map(USAGE_FILEPATH);
+
+    if (buffer == NULL)
+        return EXIT_ERROR;
+    my_putstr("Usage:\t");
+    my_putstr(binary);
+    my_putstr(" [options]\n");
+    my_putstr(buffer);
+    free(buffer);
+    return EXIT_SUCCESS;
 }

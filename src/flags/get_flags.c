@@ -30,7 +30,7 @@ const struct option optslong[] = {
 };
 
 const opt_func_t opt_func[] = {
-    {&put_help, 'h'},
+    {&toggle_help, 'h'},
     {&set_level, 'L'},
     {&set_key_left, 'l'},
     {&set_key_right, 'r'},
@@ -75,6 +75,7 @@ static flags_t *init_flags(void)
     || !flags->quit || !flags->pause)
         return NULL;
     flags->level = DEF_LEVEL;
+    flags->help = false;
     flags->without_next = DEF_LEVEL;
     flags->debug = DEF_DEBUG;
     return flags;

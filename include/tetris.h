@@ -30,6 +30,7 @@
 
 typedef struct flags_s
 {
+    bool help;
     int level;
     char **left;
     char **right;
@@ -62,8 +63,8 @@ bool init_term(struct termios *term_backup);
 
 flags_t *get_flags(int argc, char **argv);
 void free_flags_struct(flags_t *flags);
-int put_help(__attribute((unused))char *arg,
-            __attribute((unused))flags_t *flags);
+int put_file(char const *binary);
+int toggle_help(__attribute((unused))char *arg, flags_t *flags);
 int set_level(char *arg, flags_t *flags);
 int set_key_left(char *arg, flags_t *flags);
 int set_key_right(char *arg, flags_t *flags);
@@ -72,8 +73,8 @@ int set_key_drop(char *arg, flags_t *flags);
 int set_key_quit(char *arg, flags_t *flags);
 int set_key_pause(char *arg, flags_t *flags);
 int set_map_size(char *arg, flags_t *flags);
-int toggle_next(char *arg, flags_t *flags);
-int toggle_debug(char *arg, flags_t *flags);
+int toggle_next(__attribute((unused))char *arg, flags_t *flags);
+int toggle_debug(__attribute((unused))char *arg, flags_t *flags);
 
 bool allow_char(char *script, char *allow_char);
 char **read_entiere_file(const char *filepath);

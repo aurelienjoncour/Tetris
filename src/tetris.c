@@ -16,6 +16,8 @@ int tetris(int argc, char **argv)
     game.flag = get_flags(argc, argv);
     if (game.flag == NULL)
         return EXIT_ERROR;
+    if (game.flag->help)
+        return put_file(argv[0]);
     if (game.flag->debug)
         debug_mode(&game);
     if (init_term(&term_backup)) {
