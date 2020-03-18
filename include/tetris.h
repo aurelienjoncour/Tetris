@@ -78,6 +78,7 @@ char **read_entiere_file(const char *filepath);
 char **get_tetriminos_list(char const *folder);
 void parse_tetriminos(const char *filename, const char *folder,
 tetriminos_t *tetriminos, size_t i);
+bool check_error_script(char **file, tetriminos_t *tetriminos, int index);
 int create_tetriminos(char const *folder, game_t *a);
 void destroy_tetriminos(tetriminos_t *tetriminos, int nb_tetriminos);
 

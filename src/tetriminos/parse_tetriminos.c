@@ -18,10 +18,9 @@ char const *filename, char **file)
     tetriminos[i].width = 0;
     tetriminos[i].height = 0;
     tetriminos[i].name = my_strdup(filename);
-    for (size_t j = 0; tetriminos[i].name[j] != '\0'; j++) {
-        if (tetriminos[i].name[j] == '.')
+    for (size_t j = 0; tetriminos[i].name[j] != '\0'; j++)
+        if (my_strcmp(tetriminos[i].name+j, ".tetrimino") == 0)
             tetriminos[i].name[j] = '\0';
-    }
 }
 
 static char **get_tetriminos_files(const char *filename, const char *folder)
@@ -92,6 +91,9 @@ tetriminos_t *tetriminos, size_t i)
         return init_error(tetriminos, i, filename, file);
     }
     if (get_tetriminos_info(tetriminos, i, file, filename) == EXIT_ERROR) {
+        return init_error(tetriminos, i, filename, file);
+    }
+    if (check_error_script(file, tetriminos, i)) {
         return init_error(tetriminos, i, filename, file);
     }
     if (get_tetriminos_shape(tetriminos, i, file) == EXIT_ERROR) {
