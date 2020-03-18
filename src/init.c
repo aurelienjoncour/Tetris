@@ -5,8 +5,8 @@
 ** init tetris game
 */
 
-#include "tetris.h"
 #include "my.h"
+#include "tetris.h"
 
 bool init_term(struct termios *term_backup)
 {

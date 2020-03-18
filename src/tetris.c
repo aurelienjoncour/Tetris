@@ -9,14 +9,20 @@
 
 int tetris(int argc, char **argv)
 {
-    flags_t *flags = get_flags(argc, argv);
+    game_t game = {};
     struct termios term_backup = {};
 
-    if (flags == NULL || init_term(&term_backup)) {
-        free_flags_struct(flags);
+    create_tetriminos("./tetriminos/", &game);
+    game.flag = get_flags(argc, argv);
+    if (game.flag == NULL)
+        return EXIT_ERROR;
+    if (game.flag->debug)
+        debug_mode(&game);
+    if (init_term(&term_backup)) {
+        free_flags_struct(game.flag);
         return EXIT_ERROR;
     }
-    free_flags_struct(flags);
+    free_flags_struct(game.flag);
     tcsetattr(0, 0, &term_backup);
     return EXIT_SUCCESS;
 }

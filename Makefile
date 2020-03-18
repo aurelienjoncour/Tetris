@@ -31,12 +31,20 @@ LIGHT_BLUE      =       "\e[94m"
 LIGHT_MAGEN     =       "\e[95m"
 LIGHT_CYAN      =       "\e[96m"
 
-SRC =   src/main.c					\
-		src/tetris.c				\
-		src/flags/get_flags.c		\
-		src/flags/set_game_flags.c	\
-		src/flags/set_keys_arrows.c	\
-		src/flags/set_keys_game.c 	\
+SRC =   src/main.c								\
+		src/tetris.c							\
+		src/tools/word_array.c					\
+		src/tools/allowed_char.c				\
+		src/tools/read_entiere_file.c			\
+		src/tetriminos/manage_tetriminos.c		\
+		src/tetriminos/get_tetriminos_list.c	\
+		src/tetriminos/parse_tetriminos.c		\
+		src/tetriminos/check_error_script.c		\
+		src/flags/get_flags.c					\
+		src/flags/set_game_flags.c				\
+		src/flags/set_keys_arrows.c				\
+		src/flags/set_keys_game.c 				\
+		src/debug_mode.c 						\
 		src/init.c
 
 OBJ =   $(SRC:.c=.o)
