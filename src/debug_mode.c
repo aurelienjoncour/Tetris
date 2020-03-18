@@ -24,7 +24,7 @@ static void display_tetriminos(tetriminos_t *tetriminos, int nb)
         my_putstr(tetriminos[i].name);
         my_putstr(" : ");
         if (tetriminos[i].width == 0) {
-            my_putstr("Errror\n");
+            my_putstr("Error\n");
         } else {
             my_putstr("Size ");
             my_put_nbr(tetriminos[i].width);
