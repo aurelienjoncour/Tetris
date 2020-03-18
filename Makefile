@@ -36,14 +36,15 @@ SRC =   src/main.c					\
 		src/flags/get_flags.c		\
 		src/flags/set_game_flags.c	\
 		src/flags/set_keys_arrows.c	\
-		src/flags/set_keys_game.c
+		src/flags/set_keys_game.c 	\
+		src/init.c
 
 OBJ =   $(SRC:.c=.o)
 
 NAME    =   tetris
 
 CFLAGS  +=  -I include -Wall -Wextra
-LDFLAGS +=  -L lib/my -lmy
+LDFLAGS +=  -L lib/my -lmy -lncurses
 
 all:    $(NAME)
 
@@ -72,7 +73,7 @@ debug: re
 
 free: CFLAGS += -g
 free: re
-	valgrind --leak-check=full ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 %.o :		%.c
 		@gcc -c -o $@ $^ $(CFLAGS) && $(ECHO) -n $(BOLD) $(GREEN)"  [OK] "$(WHITE) || $(ECHO) -n $(BOLD) $(RED)"  [KO] "$(WHITE) && $(ECHO) $(BOLD) $< | rev | cut -d'/' -f 1 | rev

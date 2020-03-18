@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <getopt.h>
+#include <term.h>
 
 #ifndef TETRIS_H_
 #define TETRIS_H_
@@ -42,11 +43,12 @@ typedef struct flags_s
 } flags_t;
 
 int tetris(int argc, char **argv);
-flags_t *get_flags(int argc, char **argv);
+bool init_term(struct termios *term_backup);
 
+flags_t *get_flags(int argc, char **argv);
 void free_flags_struct(flags_t *flags);
-int put_help(char *arg,
-            flags_t *flags);
+int put_help(__attribute((unused))char *arg,
+            __attribute((unused))flags_t *flags);
 int set_level(char *arg, flags_t *flags);
 int set_key_left(char *arg, flags_t *flags);
 int set_key_right(char *arg, flags_t *flags);
