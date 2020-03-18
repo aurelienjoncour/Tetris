@@ -6,6 +6,7 @@
 */
 
 #include "tetris.h"
+#include "my.h"
 
 bool check_error_script(char **file, tetriminos_t *tetriminos, int index)
 {
