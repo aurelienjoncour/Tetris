@@ -41,6 +41,7 @@ int tetris(int argc, char **argv, char **env)
     if (exit_value != EXIT_SUCCESS)
         return exit_value;
     free_flags_struct(game.flag);
+    destroy_tetriminos(game.tetriminos, game.nb_tetriminos);
     ioctl(0, TCSETS, &term_backup);
     return exit_value;
 }
