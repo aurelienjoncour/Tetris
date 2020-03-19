@@ -77,7 +77,6 @@ re: fclean all
 
 debug: CFLAGS += -g
 debug: re
-	valgrind ./$(NAME)
 
 free: CFLAGS += -g
 free: re
