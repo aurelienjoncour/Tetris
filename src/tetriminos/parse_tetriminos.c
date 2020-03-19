@@ -23,7 +23,7 @@ static int init_error(tetriminos_t *tetriminos, int i,
     for (size_t j = 0; tetriminos[i].name[j] != '\0'; j++)
         if (my_strcmp(tetriminos[i].name+j, ".tetrimino") == 0)
             tetriminos[i].name[j] = '\0';
-    return EXIT_ERROR;
+    return EXIT_SUCCESS;
 }
 
 static char **get_tetriminos_files(const char *filename, const char *folder)
