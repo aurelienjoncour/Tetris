@@ -68,6 +68,18 @@ int init_ncurses(void)
         return EXIT_ERROR;
     }
     attron(A_NORMAL);
+    curs_set(0);
     start_color();
+    return EXIT_SUCCESS;
+}
+
+int init_wins(game_t *game)
+{
+    game->wins.game = newwin(game->flag->map_size[1] + 2,
+                            game->flag->map_size[0] + 2,
+                            WIN_GAME_Y, WIN_GAME_X);
+    if (game->wins.game == NULL)
+        return EXIT_ERROR;
+    box(game->wins.game, ACS_VLINE, ACS_HLINE);
     return EXIT_SUCCESS;
 }

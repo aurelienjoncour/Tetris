@@ -28,11 +28,12 @@
 #define DEF_WITHOUT_NEXT false
 #define DEF_DEBUG false
 
-#define GAME_X 0
-#define GAME_Y 0
 #define BACKGROUND_COLOR COLOR_BLACK
 #define EMPTY ' '
 #define EMPTY_COLOR COLOR_BLACK
+
+#define WIN_GAME_X 80
+#define WIN_GAME_Y 10
 
 typedef struct flags_s
 {
@@ -57,12 +58,18 @@ typedef struct tetriminos {
     int color;
 } tetriminos_t;
 
+typedef struct windows_s
+{
+    WINDOW *game;
+} windows_t;
+
 typedef struct game {
     tetriminos_t *tetriminos;
     int nb_tetriminos;
     flags_t *flag;
     char **board;
     int **colors;
+    windows_t wins;
 } game_t;
 
 int tetris(int argc, char **argv, char **env);
@@ -99,5 +106,7 @@ void debug_mode(game_t *game);
 int play_game(game_t *game);
 int init_boards(game_t *game);
 int init_ncurses(void);
+int init_wins(game_t *game);
+void destroy_game(game_t game);
 
 #endif

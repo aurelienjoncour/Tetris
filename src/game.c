@@ -15,26 +15,19 @@ static bool is_lose(void)
 
 static void print_board(game_t *game)
 {
+    int x = 1;
+    int y = 1;
+
     clear();
-    printw("/");
-    for (int i = 0; i < game->flag->map_size[0]; i++)
-        printw("-");
-    printw("\\\n");
-    for (int y = 0; y < game->flag->map_size[1]; y++) {
-        printw("|");
-        for (int x = 0; x < game->flag->map_size[0]; x++) {
-            init_pair(1, game->colors[y][x], BACKGROUND_COLOR);
+    for (int j = 0; j < game->flag->map_size[1]; j++, y++, x = 1) {
+        for (int i = 0; i < game->flag->map_size[0]; i++, x++) {
+            init_pair(1, game->colors[j][i], BACKGROUND_COLOR);
             attron(COLOR_PAIR(1));
-            printw(&game->board[y][x]);
+            mvwprintw(game->wins.game, y, x, "%c", game->board[j][i]);
             attroff(COLOR_PAIR(1));
         }
-        printw("|\n");
     }
-    printw("\\");
-    for (int i = 0; i < game->flag->map_size[0]; i++)
-        printw("-");
-    printw("/\n");
-    refresh();
+    wrefresh(game->wins.game);
 }
 
 static int update_clock(clock_t *time, game_t *game)
@@ -54,7 +47,8 @@ int play_game(game_t *game)
 {
     clock_t time = clock();
 
-    if (init_boards(game) == EXIT_ERROR || init_ncurses() == EXIT_ERROR)
+    if (init_boards(game) == EXIT_ERROR || init_ncurses() == EXIT_ERROR
+    || init_wins(game) == EXIT_ERROR)
         return EXIT_ERROR;
     print_board(game);
     while (!is_lose()) {
