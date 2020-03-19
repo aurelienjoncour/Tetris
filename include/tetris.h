@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <term.h>
+#include <curses.h>
 
 #ifndef TETRIS_H_
 #define TETRIS_H_
@@ -26,6 +27,12 @@
 #define DEF_COL 10
 #define DEF_WITHOUT_NEXT false
 #define DEF_DEBUG false
+
+#define GAME_X 0
+#define GAME_Y 0
+#define BACKGROUND_COLOR COLOR_BLACK
+#define EMPTY ' '
+#define EMPTY_COLOR COLOR_BLACK
 
 typedef struct flags_s
 {
@@ -54,6 +61,8 @@ typedef struct game {
     tetriminos_t *tetriminos;
     int nb_tetriminos;
     flags_t *flag;
+    char **board;
+    int **colors;
 } game_t;
 
 int tetris(int argc, char **argv, char **env);
@@ -86,5 +95,9 @@ int create_tetriminos(char const *folder, game_t *a);
 void destroy_tetriminos(tetriminos_t *tetriminos, int nb_tetriminos);
 
 void debug_mode(game_t *game);
+
+int play_game(game_t *game);
+int init_boards(game_t *game);
+int init_ncurses(void);
 
 #endif

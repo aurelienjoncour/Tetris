@@ -39,3 +39,35 @@ bool init_term(struct termios *term_backup, char **env)
         return true;
     return false;
 }
+
+int init_boards(game_t *game)
+{
+    game->board = malloc(sizeof(char *) * game->flag->map_size[1]);
+    game->colors = malloc(sizeof(int *) * game->flag->map_size[1]);
+
+    if (game->board == NULL || game->colors == NULL)
+        return EXIT_ERROR;
+    for (int y = 0; y < game->flag->map_size[1]; y++) {
+        game->board[y] = malloc(sizeof(char) * game->flag->map_size[0]);
+        game->colors[y] = malloc(sizeof(int) * game->flag->map_size[0]);
+        if (game->board[y] == NULL || game->colors[y] == NULL)
+            return EXIT_ERROR;
+        for (int x = 0; x < game->flag->map_size[0]; x++) {
+            game->board[y][x] = EMPTY;
+            game->colors[y][x] = EMPTY_COLOR;
+        }
+    }
+    return EXIT_SUCCESS;
+}
+
+int init_ncurses(void)
+{
+    initscr();
+    if (has_colors() == FALSE) {
+        endwin();
+        return EXIT_ERROR;
+    }
+    attron(A_NORMAL);
+    start_color();
+    return EXIT_SUCCESS;
+}
