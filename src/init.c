@@ -29,10 +29,6 @@ bool init_term(struct termios *term_backup, char **env)
         my_put_error_str("TERM env not found\n");
         return true;
     }
-    if (tgetent(NULL, term_env) <= 0) {
-        my_put_error_str("Couldn't get TERM value\n");
-        return true;
-    }
     if (ioctl(0, TCGETS, &term) == -1) {
         my_put_error_str("Couldn't get termios structure\n");
         return true;
