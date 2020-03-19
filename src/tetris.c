@@ -31,7 +31,8 @@ int tetris(int argc, char **argv, char **env)
     struct termios term_backup = {};
     int exit_value;
 
-    create_tetriminos("./tetriminos/", &game);
+    if (create_tetriminos("./tetriminos/", &game) == EXIT_ERROR)
+        return EXIT_ERROR;
     game.flag = get_flags(argc, argv, env);
     if (game.flag == NULL)
         return EXIT_ERROR;
