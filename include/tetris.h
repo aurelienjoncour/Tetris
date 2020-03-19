@@ -7,7 +7,6 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include <getopt.h>
 #include <term.h>
 
 #ifndef TETRIS_H_

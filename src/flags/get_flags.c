@@ -5,6 +5,7 @@
 ** get flags
 */
 
+#include <getopt.h>
 #include "my.h"
 #include "tetris.h"
 

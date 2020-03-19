@@ -5,6 +5,7 @@
 ** tetris game
 */
 
+#include <sys/ioctl.h>
 #include "tetris.h"
 
 static int do_first_flags(char *binary, struct termios *term_backup,
@@ -39,6 +40,6 @@ int tetris(int argc, char **argv, char **env)
     if (exit_value != EXIT_SUCCESS)
         return exit_value;
     free_flags_struct(game.flag);
-    tcsetattr(0, 0, &term_backup);
+    ioctl(0, TCSETS, &term_backup);
     return exit_value;
 }
