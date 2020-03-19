@@ -48,7 +48,6 @@ typedef struct tetriminos {
     int width;
     int height;
     int color;
-
 } tetriminos_t;
 
 typedef struct game {
