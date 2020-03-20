@@ -93,6 +93,7 @@ int toggle_debug(__attribute((unused))char *arg, flags_t *flags);
 
 bool allow_char(char *script, char *allow_char);
 char **read_entiere_file(const char *filepath);
+char *clean_string(char *str);
 
 char **get_tetriminos_list(char const *folder);
 int parse_tetriminos(const char *filename, const char *folder,
