@@ -77,7 +77,7 @@ static int get_tetriminos_shape(tetriminos_t *tetriminos, int i,
     for (int j = 0; j < tetriminos[i].height + 1; j++)
         tetriminos[i].tetriminos[j] = NULL;
     for (int j = 1; j < word_array_len(file); j++) {
-        tetriminos[i].tetriminos[j - 1] = my_strdup(file[j]);
+        tetriminos[i].tetriminos[j - 1] = my_strdup(clean_string(file[j]));
         if (tetriminos[i].tetriminos[j - 1] == NULL)
             return EXIT_ERROR;
     }

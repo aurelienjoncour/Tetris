@@ -33,6 +33,7 @@ LIGHT_CYAN      =       "\e[96m"
 
 SRC =   src/main.c								\
 		src/tetris.c							\
+		src/tools/clean_string.c				\
 		src/tools/word_array.c					\
 		src/tools/allowed_char.c				\
 		src/tools/read_entiere_file.c			\
