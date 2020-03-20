@@ -53,6 +53,9 @@ typedef struct flags_s
 typedef struct tetrimino_s {
     char *name;
     char **tetrimino;
+    char **tetrimino_2;
+    char **tetrimino_3;
+    char **tetrimino_4;
     int width;
     int height;
     int color;
@@ -109,5 +112,10 @@ int init_boards(game_t *game);
 int init_ncurses(void);
 int init_wins(game_t *game);
 void destroy_game(game_t game);
+
+int rotate_2(tetrimino_t *tetriminos, int index, char **copy);
+int rotate_3(tetrimino_t *tetriminos, int index, char **copy);
+int rotate_4(tetrimino_t *tetriminos, int index, char **copy);
+int rotate_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos);
 
 #endif

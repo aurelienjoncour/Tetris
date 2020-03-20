@@ -46,6 +46,6 @@ char *my_strndup(char const *src, int n);
 char *my_convert_base(char const *nbr, int base1, int base2);
 char *get_next_line(int fd);
 char *my_strdupcat(int argc, ...);
-void my_sort_word_array(char **tab);
+void my_sort_word_array(char **array);
 
 #endif
