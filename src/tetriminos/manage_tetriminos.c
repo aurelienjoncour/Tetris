@@ -9,10 +9,10 @@
 #include "tetris.h"
 #include "word_array.h"
 
-void destroy_tetriminos(tetriminos_t *tetriminos, int nb_tetriminos)
+void destroy_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos)
 {
     for (int i = 0; i < nb_tetriminos; i++) {
-        free_twod_array(tetriminos[i].tetriminos);
+        free_twod_array(tetriminos[i].tetrimino);
         free(tetriminos[i].name);
     }
     free(tetriminos);
@@ -26,7 +26,7 @@ int create_tetriminos(char const *folder, game_t *a)
         return EXIT_ERROR;
     a->nb_tetriminos = word_array_len(filename);
     my_sort_word_array(filename);
-    a->tetriminos = malloc(sizeof(tetriminos_t) * (a->nb_tetriminos + 1));
+    a->tetriminos = malloc(sizeof(tetrimino_t) * (a->nb_tetriminos + 1));
     if (a->tetriminos == NULL)
         return EXIT_ERROR;
     for (int i = 0; i < a->nb_tetriminos; i++)

@@ -50,13 +50,13 @@ typedef struct flags_s
     bool debug;
 } flags_t;
 
-typedef struct tetriminos {
+typedef struct tetrimino_s {
     char *name;
-    char **tetriminos;
+    char **tetrimino;
     int width;
     int height;
     int color;
-} tetriminos_t;
+} tetrimino_t;
 
 typedef struct windows_s
 {
@@ -64,7 +64,7 @@ typedef struct windows_s
 } windows_t;
 
 typedef struct game {
-    tetriminos_t *tetriminos;
+    tetrimino_t *tetriminos;
     int nb_tetriminos;
     flags_t *flag;
     char **board;
@@ -96,10 +96,10 @@ char **read_entiere_file(const char *filepath);
 
 char **get_tetriminos_list(char const *folder);
 int parse_tetriminos(const char *filename, const char *folder,
-                    tetriminos_t *tetriminos, int i);
-bool check_error_script(char **file, tetriminos_t *tetriminos, int index);
+                    tetrimino_t *tetrimino, int i);
+bool check_error_script(char **file, tetrimino_t *tetrimino, int index);
 int create_tetriminos(char const *folder, game_t *a);
-void destroy_tetriminos(tetriminos_t *tetriminos, int nb_tetriminos);
+void destroy_tetriminos(tetrimino_t *tetrimino, int nb_tetriminos);
 
 void debug_mode(game_t *game);
 

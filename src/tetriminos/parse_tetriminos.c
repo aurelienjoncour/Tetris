@@ -9,11 +9,11 @@
 #include "tetris.h"
 #include "word_array.h"
 
-static int init_error(tetriminos_t *tetriminos, int i,
+static int init_error(tetrimino_t *tetriminos, int i,
                         char const *filename, char **file)
 {
     free_twod_array(file);
-    tetriminos[i].tetriminos = NULL;
+    tetriminos[i].tetrimino = NULL;
     tetriminos[i].color = 0;
     tetriminos[i].width = 0;
     tetriminos[i].height = 0;
@@ -42,7 +42,7 @@ static char **get_tetriminos_files(const char *filename, const char *folder)
     return file;
 }
 
-static int get_tetriminos_info(tetriminos_t *tetriminos, int i,
+static int get_tetriminos_info(tetrimino_t *tetriminos, int i,
                                 char **file, const char *filename)
 {
     char **first_line = my_str_to_array(file[0], " ", false);
@@ -67,25 +67,25 @@ static int get_tetriminos_info(tetriminos_t *tetriminos, int i,
     return EXIT_SUCCESS;
 }
 
-static int get_tetriminos_shape(tetriminos_t *tetriminos, int i,
+static int get_tetriminos_shape(tetrimino_t *tetriminos, int i,
                                 char **file)
 {
-    tetriminos[i].tetriminos = malloc(sizeof(char *) *
+    tetriminos[i].tetrimino = malloc(sizeof(char *) *
                                     (tetriminos[i].height + 1));
-    if (tetriminos[i].tetriminos == NULL)
+    if (tetriminos[i].tetrimino == NULL)
         return EXIT_ERROR;
     for (int j = 0; j < tetriminos[i].height + 1; j++)
-        tetriminos[i].tetriminos[j] = NULL;
+        tetriminos[i].tetrimino[j] = NULL;
     for (int j = 1; j < word_array_len(file); j++) {
-        tetriminos[i].tetriminos[j - 1] = my_strdup(file[j]);
-        if (tetriminos[i].tetriminos[j - 1] == NULL)
+        tetriminos[i].tetrimino[j - 1] = my_strdup(file[j]);
+        if (tetriminos[i].tetrimino[j - 1] == NULL)
             return EXIT_ERROR;
     }
     return EXIT_SUCCESS;
 }
 
 int parse_tetriminos(const char *filename, const char *folder,
-                        tetriminos_t *tetriminos, int i)
+                        tetrimino_t *tetriminos, int i)
 {
     char **file = get_tetriminos_files(filename, folder);
 

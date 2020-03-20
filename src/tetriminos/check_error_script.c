@@ -8,7 +8,7 @@
 #include "my.h"
 #include "tetris.h"
 
-bool check_error_script(char **file, tetriminos_t *tetriminos, int index)
+bool check_error_script(char **file, tetrimino_t *tetriminos, int index)
 {
     if (tetriminos[index].color < 1 || tetriminos[index].color > 7)
         return true;

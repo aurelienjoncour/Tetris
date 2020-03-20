@@ -9,7 +9,7 @@
 #include "my.h"
 #include "tetris.h"
 
-static void display_tetriminos(tetriminos_t *tetriminos, int nb)
+static void display_tetriminos(tetrimino_t *tetriminos, int nb)
 {
     for (int i = 0; i < nb; i++) {
         my_putstr("Tetriminos : Name ");
@@ -25,8 +25,8 @@ static void display_tetriminos(tetriminos_t *tetriminos, int nb)
             my_putstr(" : Color ");
             my_put_nbr(tetriminos[i].color);
             my_putstr(" :\n");
-            for (size_t k = 0; tetriminos[i].tetriminos[k] != NULL; k++) {
-                my_putstr(tetriminos[i].tetriminos[k]);
+            for (size_t k = 0; tetriminos[i].tetrimino[k] != NULL; k++) {
+                my_putstr(tetriminos[i].tetrimino[k]);
                 my_putstr("\n");
             }
         }
