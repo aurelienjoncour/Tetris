@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include "tetris.h"
+#include "word_array.h"
 
 static char **copy_tetrimino(tetrimino_t *tetriminos, int index)
 {

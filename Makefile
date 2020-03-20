@@ -41,7 +41,7 @@ SRC =   src/main.c								\
 		src/tetriminos/get_tetriminos_list.c	\
 		src/tetriminos/parse_tetriminos.c		\
 		src/tetriminos/check_error_script.c		\
-		src/tetriminos/rotate_tetrimino.c		\
+		src/tetriminos/rotate_tetriminos.c		\
 		src/tetriminos/rotate_all_tetriminos.c	\
 		src/flags/get_flags.c					\
 		src/flags/set_game_flags.c				\
