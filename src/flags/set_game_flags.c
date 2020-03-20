@@ -11,18 +11,14 @@
 #include "my.h"
 #include "tetris.h"
 
-static void delete_index(char *str, int i)
-{
-    for (; str[i] != '\0'; i++)
-        str[i] = str[i + 1];
-}
-
 int set_level(char *arg, flags_t *flags)
 {
-    for (int i = 0; arg[i] != '\0'; i++)
-        if (arg[i] < '0' || arg[i] > '9')
-            delete_index(arg, i--);
+    if (allow_char(arg, "1234567890")) {
+        return EXIT_ERROR;
+    }
     flags->level = my_getnbr(arg);
+    if (flags->level < 1)
+        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
 

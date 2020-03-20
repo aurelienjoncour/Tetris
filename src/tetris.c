@@ -35,8 +35,11 @@ int tetris(int argc, char **argv, char **env)
     if (create_tetriminos("./tetriminos/", &game) == EXIT_ERROR)
         return EXIT_ERROR;
     game.flag = get_flags(argc, argv, env);
-    if (game.flag == NULL)
+    if (game.flag == NULL) {
+        put_file(argv[0]);
+        destroy_game(game);
         return EXIT_ERROR;
+    }
     exit_value = do_first_flags(argv[0], &term_backup, &game, env);
     if (exit_value != EXIT_SUCCESS)
         return exit_value;
