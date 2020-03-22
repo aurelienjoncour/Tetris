@@ -24,6 +24,7 @@ bool init_term(struct termios *term_backup, char **env)
 {
     char *term_env = my_getenv("TERM=", env);
     struct termios term;
+    char *keypad_mode = tigetstr("smkx");
 
     if (term_env == NULL) {
         my_put_error_str("TERM env not found\n");
@@ -35,6 +36,10 @@ bool init_term(struct termios *term_backup, char **env)
     }
     term.c_lflag &= ~(ICANON);
     term.c_lflag &= ~(ECHO);
+    term.c_cc[VMIN] = 0;
+    term.c_cc[VTIME] = 1;
+    if (keypad_mode != 0)
+        putp(keypad_mode);
     if (ioctl(0, TCGETS, term_backup) == -1 || ioctl(0, TCSETS, &term) == -1)
         return true;
     return false;
