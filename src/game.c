@@ -5,7 +5,9 @@
 ** tetris game
 */
 
+#include <unistd.h>
 #include <time.h>
+#include "my.h"
 #include "tetris.h"
 
 static bool is_lose(void)
@@ -46,13 +48,18 @@ static int update_clock(clock_t *time, game_t *game)
 int play_game(game_t *game)
 {
     clock_t time = clock();
+    char buff[100] = {0};
+    int read_size = 0;
 
     if (init_boards(game) == EXIT_ERROR || init_ncurses() == EXIT_ERROR
     || init_wins(game) == EXIT_ERROR)
         return EXIT_ERROR;
     print_board(game);
     while (!is_lose()) {
-
+        read_size = read(0, &buff, 10);
+        buff[read_size] = '\0';
+        if (!my_strcmp(buff, game->flag->quit[0]))
+            break;
         if (update_clock(&time, game) == EXIT_ERROR)
             return EXIT_ERROR;
     }
