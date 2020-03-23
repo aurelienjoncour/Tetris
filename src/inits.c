@@ -78,27 +78,13 @@ int init_ncurses(void)
     return EXIT_SUCCESS;
 }
 
-int init_wins(game_t *game)
+int init_all_window(game_t *game)
 {
-    game->wins.game = newwin(game->flag->map_size[0] + 2,
-                            game->flag->map_size[1] + 2,
-                            tigetnum("lines") - game->flag->map_size[0] - 2, 29);
-    if (game->wins.game == NULL)
+    if (init_wins(game) == EXIT_ERROR)
         return EXIT_ERROR;
-    box(game->wins.game, ACS_VLINE, ACS_HLINE);
-    return EXIT_SUCCESS;
-}
-
-int init_stat(game_t *game)
-{
-    game->wins.stat = newwin(10, 28, tigetnum("lines") - 10 , 0);
-    if (game->wins.game == NULL)
+    if (init_stat(game) == EXIT_ERROR)
         return EXIT_ERROR;
-    box(game->wins.stat, ACS_VLINE, ACS_HLINE);
-    game->stat.high_score = 0;
-    game->stat.score = 0;
-    game->stat.level = game->flag->level;
-    game->stat.lines_ = 0;
-    game->stat.timer = 0;
+    if (init_next(game) == EXIT_ERROR)
+        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
