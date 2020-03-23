@@ -11,6 +11,6 @@ test.c
 test
 *.sublime-*
 unit_tests
-bootstrap.c
-tetris
 .vscode/
+tetris
+.highscore
