@@ -47,17 +47,17 @@ bool init_term(struct termios *term_backup, char **env)
 
 int init_boards(game_t *game)
 {
-    game->board = malloc(sizeof(char *) * game->flag->map_size[1]);
-    game->colors = malloc(sizeof(int *) * game->flag->map_size[1]);
+    game->board = malloc(sizeof(char *) * game->flag->map_size[0]);
+    game->colors = malloc(sizeof(int *) * game->flag->map_size[0]);
 
     if (game->board == NULL || game->colors == NULL)
         return EXIT_ERROR;
-    for (int y = 0; y < game->flag->map_size[1]; y++) {
-        game->board[y] = malloc(sizeof(char) * game->flag->map_size[0]);
-        game->colors[y] = malloc(sizeof(int) * game->flag->map_size[0]);
+    for (int y = 0; y < game->flag->map_size[0]; y++) {
+        game->board[y] = malloc(sizeof(char) * game->flag->map_size[1]);
+        game->colors[y] = malloc(sizeof(int) * game->flag->map_size[1]);
         if (game->board[y] == NULL || game->colors[y] == NULL)
             return EXIT_ERROR;
-        for (int x = 0; x < game->flag->map_size[0]; x++) {
+        for (int x = 0; x < game->flag->map_size[1]; x++) {
             game->board[y][x] = EMPTY;
             game->colors[y][x] = EMPTY_COLOR;
         }
@@ -80,11 +80,25 @@ int init_ncurses(void)
 
 int init_wins(game_t *game)
 {
-    game->wins.game = newwin(game->flag->map_size[1] + 2,
-                            game->flag->map_size[0] + 2,
-                            WIN_GAME_Y, WIN_GAME_X);
+    game->wins.game = newwin(game->flag->map_size[0] + 2,
+                            game->flag->map_size[1] + 2,
+                            tigetnum("lines") - game->flag->map_size[0] - 2, 29);
     if (game->wins.game == NULL)
         return EXIT_ERROR;
     box(game->wins.game, ACS_VLINE, ACS_HLINE);
+    return EXIT_SUCCESS;
+}
+
+int init_stat(game_t *game)
+{
+    game->wins.stat = newwin(10, 28, tigetnum("lines") - 10 , 0);
+    if (game->wins.game == NULL)
+        return EXIT_ERROR;
+    box(game->wins.stat, ACS_VLINE, ACS_HLINE);
+    game->stat.high_score = 0;
+    game->stat.score = 0;
+    game->stat.level = game->flag->level;
+    game->stat.lines_ = 0;
+    game->stat.timer = 0;
     return EXIT_SUCCESS;
 }

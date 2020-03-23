@@ -64,7 +64,16 @@ typedef struct tetrimino_s {
 typedef struct windows_s
 {
     WINDOW *game;
+    WINDOW *stat;
 } windows_t;
+
+typedef struct game_stat {
+    int high_score;
+    int score;
+    int lines_;
+    int level;
+    int timer;
+} game_stat_t;
 
 typedef struct game {
     tetrimino_t *tetriminos;
@@ -73,6 +82,7 @@ typedef struct game {
     char **board;
     int **colors;
     windows_t wins;
+    game_stat_t stat;
 } game_t;
 
 int tetris(int argc, char **argv, char **env);
@@ -111,6 +121,7 @@ int play_game(game_t *game);
 int init_boards(game_t *game);
 int init_ncurses(void);
 int init_wins(game_t *game);
+int init_stat(game_t *game);
 void destroy_game(game_t game);
 
 int rotate_2(tetrimino_t *tetriminos, int index, char **copy);
