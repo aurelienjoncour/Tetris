@@ -81,8 +81,8 @@ int init_ncurses(void)
 int init_wins(game_t *game)
 {
     game->wins.game = newwin(game->flag->map_size[0] + 2,
-                            game->flag->map_size[1] + 2,
-                            tigetnum("lines") - game->flag->map_size[0] - 2, 29);
+                        game->flag->map_size[1] + 2,
+                        tigetnum("lines") - game->flag->map_size[0] - 2, 29);
     if (game->wins.game == NULL)
         return EXIT_ERROR;
     box(game->wins.game, ACS_VLINE, ACS_HLINE);

@@ -32,9 +32,6 @@
 #define EMPTY ' '
 #define EMPTY_COLOR COLOR_BLACK
 
-#define WIN_GAME_X 80
-#define WIN_GAME_Y 10
-
 typedef struct flags_s
 {
     bool help;
@@ -60,6 +57,12 @@ typedef struct tetrimino_s {
     int height;
     int color;
 } tetrimino_t;
+
+typedef struct falling_s {
+    tetrimino_t tetrimino;
+    int x;
+    int y;
+} falling_t;
 
 typedef struct windows_s
 {
@@ -123,6 +126,8 @@ int init_ncurses(void);
 int init_wins(game_t *game);
 int init_stat(game_t *game);
 void destroy_game(game_t game);
+int get_next(falling_t *fall, game_t *game);
+void print_board(falling_t fall, game_t game);
 
 int rotate_2(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_3(tetrimino_t *tetriminos, int index, char **copy);
