@@ -5,7 +5,11 @@
 ** init_windows
 */
 
+#include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "tetris.h"
+#include "my.h"
 
 int init_wins(game_t *game)
 {
@@ -20,11 +24,20 @@ int init_wins(game_t *game)
 
 int init_stat(game_t *game)
 {
+    mode_t mode = S_IROTH | S_IRWXU;
+    int fd = open(".highscore", O_RDONLY | O_CREAT, mode);
+    char highscore_file[10] = {0};
+    int read_size = 0;
+
+    if (fd != -1)
+        read_size = read(fd, &highscore_file, 10);
+    close(fd);
+    highscore_file[read_size] = '\0';
     game->wins.stat = newwin(10, 28, tigetnum("lines") - 10 , 0);
     if (game->wins.game == NULL)
         return EXIT_ERROR;
     box(game->wins.stat, ACS_VLINE, ACS_HLINE);
-    game->stat.high_score = 0;
+    game->stat.high_score = my_getnbr(highscore_file);
     game->stat.score = 0;
     game->stat.level = game->flag->level;
     game->stat.lines_ = 0;
