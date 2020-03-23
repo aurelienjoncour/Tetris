@@ -129,4 +129,6 @@ int rotate_3(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_4(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos);
 
+int check_full_line(game_t *game);
+
 #endif

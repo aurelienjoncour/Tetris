@@ -51,6 +51,7 @@ SRC =   src/main.c								\
 		src/inits.c 							\
 		src/destroy.c 							\
 		src/game.c								\
+		src/check_full_line.c					\
 
 OBJ =   $(SRC:.c=.o)
 
