@@ -26,6 +26,7 @@ static int remove_lines(game_t *game, int lines_m)
         if (game->board[i] == NULL)
             return EXIT_ERROR;
     }
+    cpy_colors_lines(game, lines_m);
     for (size_t i = 0; game->board[0][i] != '\0'; i++) {
         game->board[0][i] = ' ';
         game->colors[0][i] = EMPTY_COLOR;

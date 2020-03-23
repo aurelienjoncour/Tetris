@@ -52,6 +52,8 @@ SRC =   src/main.c								\
 		src/destroy.c 							\
 		src/game.c								\
 		src/check_full_line.c					\
+		src/init_windows.c						\
+		src/print_windows.c 					\
 		src/next.c 								\
 		src/print_game.c
 

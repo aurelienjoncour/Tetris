@@ -47,5 +47,6 @@ char *my_convert_base(char const *nbr, int base1, int base2);
 char *get_next_line(int fd);
 char *my_strdupcat(int argc, ...);
 void my_sort_word_array(char **array);
+char *my_int_to_str(int nb);
 
 #endif

@@ -68,6 +68,7 @@ typedef struct windows_s
 {
     WINDOW *game;
     WINDOW *stat;
+    WINDOW *next;
 } windows_t;
 
 typedef struct game_stat {
@@ -123,11 +124,16 @@ void debug_mode(game_t *game);
 int play_game(game_t *game);
 int init_boards(game_t *game);
 int init_ncurses(void);
+int init_all_window(game_t *game);
 int init_wins(game_t *game);
 int init_stat(game_t *game);
+int init_next(game_t *game);
 void destroy_game(game_t game);
 int get_next(falling_t *fall, game_t *game);
+
 void print_board(falling_t fall, game_t game);
+void print_info(game_t game);
+void print_next(game_t *game);
 
 int rotate_2(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_3(tetrimino_t *tetriminos, int index, char **copy);

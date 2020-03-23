@@ -5,8 +5,12 @@
 ** tetris game
 */
 
+#include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <sys/ioctl.h>
 #include "tetris.h"
+#include "my.h"
 
 static int do_first_flags(char *binary, struct termios *term_backup,
                         game_t *game, char **env)
@@ -24,6 +28,27 @@ static int do_first_flags(char *binary, struct termios *term_backup,
     if (game->flag->debug)
         debug_mode(game);
     return EXIT_SUCCESS;
+}
+
+static int save_high_score(int highscore)
+{
+    int fd = open(".highscore", O_RDWR);
+    char *highscore_str = my_int_to_str(highscore);
+
+    if (highscore_str == NULL)
+        return EXIT_ERROR;
+    write(fd, highscore_str, my_strlen(highscore_str));
+    close(fd);
+    free(highscore_str);
+    return EXIT_SUCCESS;
+}
+
+static void end_game(struct termios *term_backup, game_t *game)
+{
+    destroy_game(*game);
+    ioctl(0, TCSETS, term_backup);
+    if (game->stat.score > game->stat.high_score)
+        save_high_score(game->stat.score);
 }
 
 int tetris(int argc, char **argv, char **env)
@@ -44,7 +69,6 @@ int tetris(int argc, char **argv, char **env)
     if (exit_value != EXIT_SUCCESS)
         return exit_value;
     exit_value = play_game(&game);
-    destroy_game(game);
-    ioctl(0, TCSETS, &term_backup);
+    end_game(&term_backup, &game);
     return exit_value;
 }
