@@ -20,6 +20,8 @@ int get_next(falling_t *fall, game_t *game)
     tetrimino_t new_tetri = game->tetriminos[rand() % game->nb_tetriminos];
 
     if (fall->x <= -1) {
+        while (new_tetri.tetrimino == NULL)
+            new_tetri = game->tetriminos[rand() % game->nb_tetriminos];
         if (!can_spawn(new_tetri, game))
             return EXIT_FAILURE;
         fall->x = game->flag->map_size[1] / 2;
