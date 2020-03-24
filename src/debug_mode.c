@@ -87,6 +87,7 @@ void debug_mode(game_t *game)
     int nb = 0;
     char buf[1] = {0};
 
+    my_set_term(0);
     my_putstr("*** DEBUG MODE ***\n");
     display_key(game->flag);
     display_game_info(game);
@@ -95,4 +96,5 @@ void debug_mode(game_t *game)
     while (nb == 0)  {
         nb = read(0, &buf, 1);
     }
+    my_set_term(1);
 }
