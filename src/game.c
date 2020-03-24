@@ -28,14 +28,17 @@ int play_game(game_t *game)
 {
     clock_t time = clock();
     falling_t fall = {{0}, -1, -1};
+    int exit_value = EXIT_SUCCESS;
 
     if (init_boards(game) == EXIT_ERROR || init_all_window(game) == EXIT_ERROR)
         return EXIT_ERROR;
     print_info(game);
     print_next(game);
     while (get_next(&fall, game) == EXIT_SUCCESS
-    && get_inputs(game, &fall) == EXIT_SUCCESS) {
-        if (update_clock(&time, game, &fall) == EXIT_ERROR)
+    && exit_value == EXIT_SUCCESS) {
+        exit_value = get_inputs(game, &fall);
+        if (exit_value == EXIT_ERROR
+        || update_clock(&time, game, &fall) == EXIT_ERROR)
             return EXIT_ERROR;
     }
     clear();
