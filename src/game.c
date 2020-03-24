@@ -16,7 +16,7 @@ static int update_clock(clock_t *time, game_t game, falling_t *fall)
 
     if (*time == -1 || current == -1)
         return EXIT_ERROR;
-    if (current / CLOCKS_PER_SEC - *time / CLOCKS_PER_SEC > 1) {
+    if (current / 1000 - *time / 1000 > 0) { //if (current / CLOCKS_PER_SEC - *time / CLOCKS_PER_SEC > 1) {
         fall->y++;
         print_board(*fall, game);
         print_info(game);
@@ -29,11 +29,10 @@ int play_game(game_t *game)
 {
     clock_t time = clock();
     char buff[100] = {0};
-    int read_size = 0;
+    size_t read_size = 0;
     falling_t fall = {{0}, -1, -1};
 
-    if (init_boards(game) == EXIT_ERROR || init_ncurses() == EXIT_ERROR
-    || init_all_window(game) == EXIT_ERROR)
+    if (init_boards(game) == EXIT_ERROR || init_all_window(game) == EXIT_ERROR)
         return EXIT_ERROR;
     print_info(*game);
     print_next(game);
@@ -46,6 +45,5 @@ int play_game(game_t *game)
             return EXIT_ERROR;
     }
     clear();
-    endwin();
     return EXIT_SUCCESS;
 }

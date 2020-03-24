@@ -12,18 +12,13 @@
 #include "tetris.h"
 #include "my.h"
 
-static int do_first_flags(char *binary, struct termios *term_backup,
-                        game_t *game, char **env)
+static int do_first_flags(char *binary, game_t *game)
 {
     if (game->flag->help) {
         free_flags_struct(game->flag);
         if (put_file(binary) == EXIT_ERROR)
             return EXIT_ERROR;
         return -1;
-    }
-    if (init_term(term_backup, env)) {
-        free_flags_struct(game->flag);
-        return EXIT_ERROR;
     }
     if (game->flag->debug)
         debug_mode(game);
@@ -43,18 +38,26 @@ static int save_high_score(int highscore)
     return EXIT_SUCCESS;
 }
 
-static void end_game(struct termios *term_backup, game_t *game)
+static void end_game(game_t *game)
 {
     destroy_game(*game);
-    ioctl(0, TCSETS, term_backup);
+    my_set_term(1);
+    endwin();
     if (game->stat.score > game->stat.high_score)
         save_high_score(game->stat.score);
+}
+
+static int fail_init_term(game_t *game)
+{
+    free_flags_struct(game->flag);
+    endwin();
+    my_set_term(1);
+    return EXIT_ERROR;
 }
 
 int tetris(int argc, char **argv, char **env)
 {
     game_t game = {};
-    struct termios term_backup = {};
     int exit_value;
 
     if (create_tetriminos("./tetriminos/", &game) == EXIT_ERROR)
@@ -65,10 +68,12 @@ int tetris(int argc, char **argv, char **env)
         destroy_game(game);
         return EXIT_ERROR;
     }
-    exit_value = do_first_flags(argv[0], &term_backup, &game, env);
+    exit_value = do_first_flags(argv[0], &game);
     if (exit_value != EXIT_SUCCESS)
         return exit_value;
+    if (init_term(env))
+        return fail_init_term(&game);
     exit_value = play_game(&game);
-    end_game(&term_backup, &game);
+    end_game(&game);
     return exit_value;
 }

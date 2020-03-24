@@ -91,7 +91,7 @@ typedef struct game {
 
 int tetris(int argc, char **argv, char **env);
 char *my_getenv(char const *var, char **env);
-bool init_term(struct termios *term_backup, char **env);
+bool init_term(char **env);
 
 flags_t *get_flags(int argc, char **argv, char **env);
 void free_flags_struct(flags_t *flags);
@@ -141,5 +141,7 @@ int rotate_4(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos);
 
 int check_full_line(game_t *game);
+
+int my_set_term(int status);
 
 #endif
