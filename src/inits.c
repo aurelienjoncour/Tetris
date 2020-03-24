@@ -28,8 +28,8 @@ bool init_term(struct termios *term_backup, char **env)
 
     if (term_env == NULL || ioctl(0, TCGETS, &term) == -1)
         return true;
-    term.c_lflag &= ~(ICANON);
-    term.c_lflag &= ~(ECHO);
+    term.c_lflag &= ~ICANON;
+    term.c_lflag &= ~ECHO;
     term.c_cc[VMIN] = 0;
     term.c_cc[VTIME] = 1;
     if (keypad_mode != 0)
