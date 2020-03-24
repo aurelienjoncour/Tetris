@@ -9,9 +9,9 @@
 #include "tetris.h"
 #include "my.h"
 
-const input_func_t inputs_func[1] = {
-    move_tetri_left/*,
-    move_tetri_right,
+const input_func_t inputs_func[2] = {
+    move_tetri_left,
+    move_tetri_right/*,
     move_tetri_turn,
     move_tetri_drop,
     game_pause,

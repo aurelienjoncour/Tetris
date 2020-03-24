@@ -145,5 +145,6 @@ int check_full_line(game_t *game);
 
 int get_inputs(game_t *game, falling_t *fall);
 int move_tetri_left(game_t *game, falling_t *fall);
+int move_tetri_right(game_t *game, falling_t *fall);
 
 #endif
