@@ -10,7 +10,7 @@
 static void put_falling(falling_t fall, game_t game, bool put)
 {
     for (int y = 0; y < fall.tetrimino.height; y++)
-        for (int x = 0; x <= fall.tetrimino.width; x++)
+        for (int x = 0; fall.tetrimino.tetrimino[y][x] != '\0'; x++)
             game.board[fall.y + y][fall.x + x] =
                 put ? fall.tetrimino.tetrimino[y][x] : EMPTY;
 }
