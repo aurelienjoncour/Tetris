@@ -40,7 +40,7 @@ int init_stat(game_t *game)
     game->stat.high_score = my_getnbr(highscore_file);
     game->stat.score = 0;
     game->stat.level = game->flag->level;
-    game->stat.lines_ = 0;
+    game->stat.my_lines = 0;
     game->stat.timer = 0;
     return EXIT_SUCCESS;
 }

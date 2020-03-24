@@ -74,7 +74,7 @@ typedef struct windows_s
 typedef struct game_stat {
     int high_score;
     int score;
-    int lines_;
+    int my_lines;
     int level;
     int timer;
 } game_stat_t;
