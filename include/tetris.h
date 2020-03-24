@@ -87,7 +87,7 @@ typedef struct game {
     int **colors;
     windows_t wins;
     game_stat_t stat;
-} game_t;
+} __attribute__((packed)) game_t;
 
 typedef int (*input_func_t)(game_t *, falling_t *);
 

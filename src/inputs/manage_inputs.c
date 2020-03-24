@@ -27,14 +27,14 @@ static int check_key(bool is_valid, game_t *game, falling_t *fall, int i)
 
 static int apply_inputs(char *buffer, game_t *game, falling_t *fall)
 {
-    game_t *manage = game;
+    flags_t *manage = game->flag;
     char **tmp;
     int exit_value = -1;
 
-    for (int k = 0; k < 1; k++) {
+    for (int k = 0; buffer[0] != '\0' && k < 1; k++) {
         tmp = *(void **)manage;
         for (int i = 0; exit_value == -1 && tmp[i] != NULL; i++)
-            exit_value = check_key(!my_strcmp(buffer, tmp[i]), game, fall, i);
+            exit_value = check_key(!my_strcmp(buffer, tmp[i]), game, fall, k);
         if (exit_value != -1)
             return exit_value;
         manage = (void *)manage + 8;
