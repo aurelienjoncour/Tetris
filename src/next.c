@@ -27,7 +27,7 @@ int get_next(falling_t *fall, game_t *game)
         fall->x = game->flag->map_size[1] / 2;
         fall->y = 0;
         fall->tetrimino = new_tetri;
-        print_board(*fall, *game);
+        print_board(*fall, game);
     }
     return EXIT_SUCCESS;
 }

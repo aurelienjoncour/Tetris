@@ -34,14 +34,14 @@
 
 typedef struct flags_s
 {
-    bool help;
-    int level;
     char **left;
     char **right;
     char **turn;
     char **drop;
-    char **quit;
     char **pause;
+    char **quit;
+    bool help;
+    int level;
     int map_size[2];
     bool without_next;
     bool debug;
@@ -89,9 +89,13 @@ typedef struct game {
     game_stat_t stat;
 } game_t;
 
+typedef int (*input_func_t)(game_t *, falling_t *);
+
 int tetris(int argc, char **argv, char **env);
+void debug_mode(game_t *game);
 char *my_getenv(char const *var, char **env);
 bool init_term(char **env);
+bool set_term_mode(bool toggle);
 
 flags_t *get_flags(int argc, char **argv, char **env);
 void free_flags_struct(flags_t *flags);
@@ -119,8 +123,6 @@ bool check_error_script(char **file, tetrimino_t *tetrimino, int index);
 int create_tetriminos(char const *folder, game_t *a);
 void destroy_tetriminos(tetrimino_t *tetrimino, int nb_tetriminos);
 
-void debug_mode(game_t *game);
-
 int play_game(game_t *game);
 int init_boards(game_t *game);
 int init_ncurses(void);
@@ -131,17 +133,17 @@ int init_next(game_t *game);
 void destroy_game(game_t game);
 int get_next(falling_t *fall, game_t *game);
 
-void print_board(falling_t fall, game_t game);
-void print_info(game_t game);
+void print_board(falling_t fall, game_t *game);
+void print_info(game_t *game);
 void print_next(game_t *game);
 
 int rotate_2(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_3(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_4(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos);
-
 int check_full_line(game_t *game);
 
-bool set_term_mode(bool toggle);
+int get_inputs(game_t *game, falling_t *fall);
+int move_tetri_left(game_t *game, falling_t *fall);
 
 #endif
