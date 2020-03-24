@@ -16,7 +16,8 @@ static int update_clock(clock_t *time, game_t *game, falling_t *fall)
     if (*time == -1 || current == -1)
         return EXIT_ERROR;
     if (current / 1000 - *time / 1000 > 0) {
-        fall->y++;
+        if (!game->pause)
+            fall->y++;
         print_board(*fall, game);
         print_info(game);
         *time = clock();

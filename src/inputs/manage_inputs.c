@@ -16,7 +16,7 @@ const input_func_t inputs_func[3] = {
     move_tetri_turn,
     move_tetri_drop,
     game_pause,
-    game_quit*/
+    game_quit,*/
 };
 
 static int check_key(bool is_valid, game_t *game, falling_t *fall, int i)

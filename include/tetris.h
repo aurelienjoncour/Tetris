@@ -87,7 +87,8 @@ typedef struct game {
     int **colors;
     windows_t wins;
     game_stat_t stat;
-} __attribute__((packed)) game_t;
+    bool pause;
+} game_t;
 
 typedef int (*input_func_t)(game_t *, falling_t *);
 
@@ -146,5 +147,8 @@ int check_full_line(game_t *game);
 int get_inputs(game_t *game, falling_t *fall);
 int move_tetri_left(game_t *game, falling_t *fall);
 int move_tetri_right(game_t *game, falling_t *fall);
+int game_pause(game_t *game, __attribute((unused))falling_t *fall);
+int game_quit(__attribute((unused))game_t *game,
+            __attribute((unused))falling_t *fall);
 
 #endif
