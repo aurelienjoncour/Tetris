@@ -17,7 +17,7 @@ int move_tetri_left(game_t *game, falling_t *fall)
 
 int move_tetri_right(game_t *game, falling_t *fall)
 {
-    if (fall->x + fall->tetrimino.width <= game->flag->map_size[1])
+    if (fall->x + fall->tetrimino.width < game->flag->map_size[1])
         fall->x++;
     print_board(*fall, game);
     return EXIT_SUCCESS;

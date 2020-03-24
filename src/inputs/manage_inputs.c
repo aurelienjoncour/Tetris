@@ -9,9 +9,10 @@
 #include "tetris.h"
 #include "my.h"
 
-const input_func_t inputs_func[2] = {
+const input_func_t inputs_func[3] = {
     move_tetri_left,
-    move_tetri_right/*,
+    move_tetri_right,
+    NULL/*,
     move_tetri_turn,
     move_tetri_drop,
     game_pause,
@@ -31,7 +32,7 @@ static int apply_inputs(char *buffer, game_t *game, falling_t *fall)
     char **tmp;
     int exit_value = -1;
 
-    for (int k = 0; buffer[0] != '\0' && k < 1; k++) {
+    for (int k = 0; buffer[0] != '\0' && inputs_func[k] != NULL; k++) {
         tmp = *(void **)manage;
         for (int i = 0; exit_value == -1 && tmp[i] != NULL; i++)
             exit_value = check_key(!my_strcmp(buffer, tmp[i]), game, fall, k);
