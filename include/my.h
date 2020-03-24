@@ -10,8 +10,6 @@
 #ifndef MY_H
 #define MY_H
 
-#define READ_SIZE 10
-
 int my_putchar(char c);
 int my_put_error_str(char const *str);
 int my_put_nbr(int nb);
@@ -44,7 +42,6 @@ char **my_str_to_func_array(char const *str,
 char *my_strdup(char const *src);
 char *my_strndup(char const *src, int n);
 char *my_convert_base(char const *nbr, int base1, int base2);
-char *get_next_line(int fd);
 char *my_strdupcat(int argc, ...);
 void my_sort_word_array(char **array);
 char *my_int_to_str(int nb);
