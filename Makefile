@@ -55,7 +55,8 @@ SRC =   src/main.c								\
 		src/init_windows.c						\
 		src/print_windows.c 					\
 		src/next.c 								\
-		src/print_game.c
+		src/print_game.c						\
+		src/my_set_term.c						\
 
 OBJ =   $(SRC:.c=.o)
 

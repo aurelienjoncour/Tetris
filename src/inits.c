@@ -6,7 +6,6 @@
 */
 
 #include <sys/ioctl.h>
-#include <sys/ioctl.h>
 #include "my.h"
 #include "tetris.h"
 
@@ -20,22 +19,29 @@ char *my_getenv(char const *var, char **env)
     return NULL;
 }
 
-bool init_term(struct termios *term_backup, char **env)
+int init_ncurses(void)
+{
+    curs_set(0);
+    if (has_colors() == FALSE) {
+        endwin();
+        return EXIT_ERROR;
+    }
+    attron(A_NORMAL);
+    start_color();
+    return EXIT_SUCCESS;
+}
+
+bool init_term(char **env)
 {
     char *term_env = my_getenv("TERM=", env);
-    struct termios term;
     char *keypad_mode = tigetstr("smkx");
 
-    if (term_env == NULL || ioctl(0, TCGETS, &term) == -1)
+    if (term_env == NULL || keypad_mode == NULL)
         return true;
-    term.c_lflag &= ~ICANON;
-    term.c_lflag &= ~ECHO;
-    term.c_cc[VMIN] = 0;
-    term.c_cc[VTIME] = 1;
-    if (keypad_mode != 0)
-        putp(keypad_mode);
-    if (ioctl(0, TCGETS, term_backup) == -1 || ioctl(0, TCSETS, &term) == -1)
-        return true;
+    putp(keypad_mode);
+    initscr();
+    my_set_term(0);
+    init_ncurses();
     return false;
 }
 
@@ -56,19 +62,6 @@ int init_boards(game_t *game)
             game->colors[y][x] = EMPTY_COLOR;
         }
     }
-    return EXIT_SUCCESS;
-}
-
-int init_ncurses(void)
-{
-    initscr();
-    if (has_colors() == FALSE) {
-        endwin();
-        return EXIT_ERROR;
-    }
-    attron(A_NORMAL);
-    curs_set(0);
-    start_color();
     return EXIT_SUCCESS;
 }
 
