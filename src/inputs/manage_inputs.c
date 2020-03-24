@@ -9,14 +9,14 @@
 #include "tetris.h"
 #include "my.h"
 
-const input_func_t inputs_func[3] = {
+const input_func_t inputs_func[7] = {
     move_tetri_left,
     move_tetri_right,
-    NULL/*,
     move_tetri_turn,
     move_tetri_drop,
     game_pause,
-    game_quit*/
+    game_quit,
+    NULL
 };
 
 static int check_key(bool is_valid, game_t *game, falling_t *fall, int i)
