@@ -5,6 +5,7 @@
 ** move tetriminos
 */
 
+#include <unistd.h>
 #include "tetris.h"
 
 int move_tetri_left(game_t *game, falling_t *fall)
@@ -38,5 +39,10 @@ int move_tetri_drop(game_t *game, falling_t *fall)
 {
     if (game->pause)
         return EXIT_SUCCESS;
+    while (fall->y + fall->tetrimino.height < game->flag->map_size[0]) {
+        fall->y++;
+        print_board(*fall, game);
+        usleep(20000);
+    }
     return EXIT_SUCCESS;
 }
