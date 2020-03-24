@@ -87,14 +87,13 @@ void debug_mode(game_t *game)
     int nb = 0;
     char buf[1] = {0};
 
-    my_set_term(0);
+    set_term_mode(false);
     my_putstr("*** DEBUG MODE ***\n");
     display_key(game->flag);
     display_game_info(game);
     display_tetriminos(game->tetriminos, game->nb_tetriminos);
     my_putstr("Press any key to start Tetris\n");
-    while (nb == 0)  {
+    while (nb == 0)
         nb = read(0, &buf, 1);
-    }
-    my_set_term(1);
+    set_term_mode(true);
 }

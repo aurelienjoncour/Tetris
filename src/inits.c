@@ -40,7 +40,7 @@ bool init_term(char **env)
         return true;
     putp(keypad_mode);
     initscr();
-    my_set_term(0);
+    set_term_mode(false);
     init_ncurses();
     return false;
 }

@@ -41,7 +41,7 @@ static int save_high_score(int highscore)
 static void end_game(game_t *game)
 {
     destroy_game(*game);
-    my_set_term(1);
+    set_term_mode(true);
     endwin();
     if (game->stat.score > game->stat.high_score)
         save_high_score(game->stat.score);
@@ -51,7 +51,7 @@ static int fail_init_term(game_t *game)
 {
     free_flags_struct(game->flag);
     endwin();
-    my_set_term(1);
+    set_term_mode(true);
     return EXIT_ERROR;
 }
 
