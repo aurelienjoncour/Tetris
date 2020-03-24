@@ -35,7 +35,6 @@ SRC	=	src/my_compute_power_rec.c	\
 		src/my_convert_base.c	\
 		src/my_str_to_array.c	\
 		src/my_put_error_str.c	\
-		src/get_next_line.c	\
 		src/my_sort_word_array.c	\
 		src/my_strdupcat.c	\
 		src/my_int_to_str.c	\
