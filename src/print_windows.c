@@ -9,8 +9,6 @@
 
 void print_info(game_t *game)
 {
-    init_pair(1, COLOR_BLACK, BACKGROUND_COLOR);
-    attron(COLOR_PAIR(1));
     mvwprintw(game->wins.stat, 1, 1, "                          ");
     mvwprintw(game->wins.stat, 2, 1, " High Score %14d", game->stat.high_score);
     mvwprintw(game->wins.stat, 3, 1, " Score %19d", game->stat.score);
@@ -19,7 +17,6 @@ void print_info(game_t *game)
     mvwprintw(game->wins.stat, 6, 1, " Level %19d", game->stat.level);
     mvwprintw(game->wins.stat, 7, 1, "                          ");
     mvwprintw(game->wins.stat, 8, 1, " Timer %19d", game->stat.timer);
-    attroff(COLOR_PAIR(1));
     wrefresh(game->wins.stat);
 }
 
