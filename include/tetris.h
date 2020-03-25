@@ -28,7 +28,6 @@
 #define DEF_WITHOUT_NEXT false
 #define DEF_DEBUG false
 
-#define BACKGROUND_COLOR COLOR_BLACK
 #define EMPTY ' '
 #define EMPTY_COLOR COLOR_BLACK
 
