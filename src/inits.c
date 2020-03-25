@@ -28,6 +28,8 @@ int init_ncurses(void)
     }
     attron(A_NORMAL);
     start_color();
+    for (size_t i = 1; i < 8; i++)
+        init_pair(i, i, COLOR_BLACK);
     return EXIT_SUCCESS;
 }
 
