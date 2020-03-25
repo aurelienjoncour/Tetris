@@ -89,6 +89,7 @@ int parse_tetriminos(const char *filename, const char *folder,
 {
     char **file = get_tetriminos_files(filename, folder);
 
+    tetriminos[i].rotation = 0;
     if (file == NULL)
         return init_error(tetriminos, i, filename, file);
     if (get_tetriminos_info(tetriminos, i, file, filename) == EXIT_ERROR)

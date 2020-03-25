@@ -59,7 +59,8 @@ SRC =   src/main.c								\
 		src/set_term_mode.c						\
 		src/inputs/manage_inputs.c				\
 		src/inputs/move_tetriminos.c			\
-		src/inputs/game_inputs.c
+		src/inputs/game_inputs.c				\
+		src/inputs/rotation_tetrimino.c			\
 
 OBJ =   $(SRC:.c=.o)
 

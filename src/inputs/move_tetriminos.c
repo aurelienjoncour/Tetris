@@ -30,8 +30,20 @@ int move_tetri_right(game_t *game, falling_t *fall)
 
 int move_tetri_turn(game_t *game, falling_t *fall)
 {
+    static char **save_initial = NULL;
+
     if (game->pause)
         return EXIT_SUCCESS;
+    if (fall->tetrimino.rotation == 0) {
+        save_initial = fall->tetrimino.tetrimino;
+        return first_rotation(game, fall);
+    }
+    if (fall->tetrimino.rotation == 1)
+        return second_rotation(game, fall);
+    if (fall->tetrimino.rotation == 2)
+        return third_rotation(game, fall);
+    if (fall->tetrimino.rotation == 3)
+        return last_rotation(game, fall, save_initial);
     return EXIT_SUCCESS;
 }
 

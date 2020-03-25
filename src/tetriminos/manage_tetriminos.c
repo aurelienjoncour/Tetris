@@ -13,6 +13,9 @@ void destroy_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos)
 {
     for (int i = 0; i < nb_tetriminos; i++) {
         free_twod_array(tetriminos[i].tetrimino);
+        free_twod_array(tetriminos[i].tetrimino_2);
+        free_twod_array(tetriminos[i].tetrimino_3);
+        free_twod_array(tetriminos[i].tetrimino_4);
         free(tetriminos[i].name);
     }
     free(tetriminos);
@@ -34,5 +37,7 @@ int create_tetriminos(char const *folder, game_t *a)
         == EXIT_ERROR)
             return EXIT_ERROR;
     free_twod_array(filename);
+    if (rotate_tetriminos(a->tetriminos, a->nb_tetriminos) == EXIT_ERROR)
+        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }

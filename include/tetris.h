@@ -56,6 +56,7 @@ typedef struct tetrimino_s {
     int width;
     int height;
     int color;
+    int rotation;
 } tetrimino_t;
 
 typedef struct falling_s {
@@ -153,4 +154,8 @@ int game_pause(game_t *game, __attribute((unused))falling_t *fall);
 int game_quit(__attribute((unused))game_t *game,
             __attribute((unused))falling_t *fall);
 
+int first_rotation(game_t *game, falling_t *fall);
+int second_rotation(game_t *game, falling_t *fall);
+int third_rotation(game_t *game, falling_t *fall);
+int last_rotation(game_t *game, falling_t *fall, char **save_initial);
 #endif
