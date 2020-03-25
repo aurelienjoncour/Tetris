@@ -51,9 +51,8 @@ int move_tetri_drop(game_t *game, falling_t *fall)
 {
     if (game->pause)
         return EXIT_SUCCESS;
-    while (fall->y + fall->tetrimino.height < game->flag->map_size[0]) {
-        fall->y++;
-        print_board(*fall, game);
+    while (fall->x >= 0) {
+        fall_tetrimino(game, fall);
         usleep(20000);
     }
     return EXIT_SUCCESS;

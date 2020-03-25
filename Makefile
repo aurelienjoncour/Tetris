@@ -54,7 +54,7 @@ SRC =   src/main.c								\
 		src/check_full_line.c					\
 		src/init_windows.c						\
 		src/print_windows.c 					\
-		src/next.c 								\
+		src/falling.c 							\
 		src/print_game.c						\
 		src/set_term_mode.c						\
 		src/inputs/manage_inputs.c				\

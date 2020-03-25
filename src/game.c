@@ -16,9 +16,8 @@ static int update_clock(clock_t *time, game_t *game, falling_t *fall)
     if (*time == -1 || current == -1)
         return EXIT_ERROR;
     if (current / 1000 - *time / 1000 > 0) {
-        if (!game->pause && fall->y + fall->tetrimino.height < game->flag->map_size[0])
-            fall->y++;
-        print_board(*fall, game);
+        if (!game->pause && fall->x >= 0)
+            fall_tetrimino(game, fall);
         print_info(game);
         *time = clock();
     }

@@ -134,6 +134,7 @@ int init_stat(game_t *game);
 int init_next(game_t *game);
 void destroy_game(game_t game);
 int get_next(falling_t *fall, game_t *game);
+void fall_tetrimino(game_t *game, falling_t *fall);
 
 void print_board(falling_t fall, game_t *game);
 void print_info(game_t *game);
@@ -144,6 +145,10 @@ int rotate_3(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_4(tetrimino_t *tetriminos, int index, char **copy);
 int rotate_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos);
 int check_full_line(game_t *game);
+int first_rotation(game_t *game, falling_t *fall);
+int second_rotation(game_t *game, falling_t *fall);
+int third_rotation(game_t *game, falling_t *fall);
+int last_rotation(game_t *game, falling_t *fall, char **save_initial);
 
 int get_inputs(game_t *game, falling_t *fall);
 int move_tetri_left(game_t *game, falling_t *fall);
@@ -154,8 +159,4 @@ int game_pause(game_t *game, __attribute((unused))falling_t *fall);
 int game_quit(__attribute((unused))game_t *game,
             __attribute((unused))falling_t *fall);
 
-int first_rotation(game_t *game, falling_t *fall);
-int second_rotation(game_t *game, falling_t *fall);
-int third_rotation(game_t *game, falling_t *fall);
-int last_rotation(game_t *game, falling_t *fall, char **save_initial);
 #endif
