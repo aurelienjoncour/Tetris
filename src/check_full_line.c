@@ -20,6 +20,8 @@ static void cpy_colors_lines(game_t *game, int lines_m)
 static int remove_lines(game_t *game, int lines_m)
 {
     game->stat.my_lines++;
+    if (game->stat.my_lines % 10 == 0)
+        game->stat.level++;
     for (int i = lines_m; i > 1; i--) {
         free(game->board[i]);
         game->board[i] = my_strdup(game->board[i - 1]);
