@@ -15,7 +15,7 @@ int init_wins(game_t *game)
 {
     game->wins.game = newwin(game->flag->map_size[0] + 2,
                         game->flag->map_size[1] + 2,
-                        tigetnum("lines") - game->flag->map_size[0] - 2, 29);
+                        tigetnum("lines") - game->flag->map_size[0] - 2, 32);
     if (game->wins.game == NULL)
         return EXIT_ERROR;
     box(game->wins.game, ACS_VLINE, ACS_HLINE);
@@ -51,5 +51,13 @@ int init_next(game_t *game)
     if (game->wins.next == NULL)
         return EXIT_ERROR;
     box(game->wins.next, ACS_VLINE, ACS_HLINE);
+    return EXIT_SUCCESS;
+}
+
+int init_tittle(game_t *game)
+{
+    game->wins.tittle = newwin(10, 32, LINES - 30, 0);
+    if (game->wins.tittle == NULL)
+        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }

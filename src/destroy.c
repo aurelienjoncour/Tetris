@@ -14,4 +14,5 @@ void destroy_game(game_t game)
     delwin(game.wins.game);
     delwin(game.wins.next);
     delwin(game.wins.stat);
+    delwin(game.wins.tittle);
 }

@@ -34,6 +34,7 @@ int play_game(game_t *game)
         return EXIT_ERROR;
     print_info(game);
     print_next(game);
+    print_tittle(game);
     while (get_next(&fall, game) == EXIT_SUCCESS
     && exit_value == EXIT_SUCCESS) {
         exit_value = get_inputs(game, &fall);

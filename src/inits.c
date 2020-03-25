@@ -75,5 +75,7 @@ int init_all_window(game_t *game)
         return EXIT_ERROR;
     if (init_next(game) == EXIT_ERROR)
         return EXIT_ERROR;
+    if (init_tittle(game) == EXIT_ERROR)
+        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
