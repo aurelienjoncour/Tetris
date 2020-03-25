@@ -41,6 +41,7 @@ int play_game(game_t *game)
         if (exit_value == EXIT_ERROR
         || update_clock(&time, game, &fall) == EXIT_ERROR)
             return EXIT_ERROR;
+        check_full_line(game);
     }
     clear();
     return EXIT_SUCCESS;
