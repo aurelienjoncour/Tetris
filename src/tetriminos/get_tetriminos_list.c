@@ -12,14 +12,29 @@
 #include "my.h"
 #include "word_array.h"
 
-static char **read_folder(DIR *directory, struct dirent *dir_info)
+static bool is_it_folder(const char *filename, char const *folder)
+{
+    struct stat buff;
+    char filepath[PATH_MAX] = {0};
+
+    my_strcpy(filepath, folder);
+    my_strcat(filepath, filename);
+    if (lstat(filepath, &buff) == -1)
+        return true;
+    if (S_ISDIR(buff.st_mode))
+        return true;
+    return false;
+}
+
+static char **read_folder(DIR *directory, struct dirent *dir_info,
+char const *folder)
 {
     char **tetriminos_files = malloc(sizeof(char *) * 2);
 
     if (tetriminos_files != NULL)
         tetriminos_files[0] = NULL;
     for (size_t i = 0; tetriminos_files != NULL && dir_info != NULL;) {
-        if (dir_info->d_name[0] != '.') {
+        if (is_it_folder(dir_info->d_name, folder) == false) {
             tetriminos_files[i] = my_strdup(dir_info->d_name);
             tetriminos_files[i + 1] = NULL;
             if (tetriminos_files[i] == NULL)
@@ -47,5 +62,5 @@ char **get_tetriminos_list(char const *folder)
     if (directory == NULL)
         return NULL;
     dir_info = readdir(directory);
-    return read_folder(directory, dir_info);
+    return read_folder(directory, dir_info, folder);
 }
