@@ -13,7 +13,7 @@ static char **copy_tetrimino(tetrimino_t *tetriminos, int index)
 {
     char **tetrimino = malloc(sizeof(char *) * (tetriminos[index].height + 1));
 
-    if (tetrimino == NULL)
+    if (tetriminos[index].height == 0)
         return NULL;
     for (int i = 0; i < tetriminos[index].height; i++) {
         tetrimino[i] = malloc(sizeof(char) * (tetriminos[index].width + 1));
@@ -37,8 +37,6 @@ int rotate_tetriminos(tetrimino_t *tetriminos, int nb_tetriminos)
 
     for (int i = 0; i < nb_tetriminos; i++) {
         copy = copy_tetrimino(tetriminos, i);
-        if (copy == NULL)
-            return EXIT_ERROR;
         if (rotate_2(tetriminos, i, copy) != EXIT_SUCCESS)
             return EXIT_ERROR;
         if (rotate_3(tetriminos, i, copy) != EXIT_SUCCESS)
