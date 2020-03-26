@@ -38,9 +38,8 @@ static void stock_tetrimino(game_t *game, falling_t *fall)
     for (int y = 0; y < fall->tetrimino.height; y++)
         for (int x = 0; fall->tetrimino.tetrimino[y][x] != '\0'; x++) {
             game->board[fall->y + y][fall->x + x] =
-                game->board[fall->y + y][fall->x + x] == EMPTY
-                ? fall->tetrimino.tetrimino[y][x]
-                : game->board[fall->y + y][fall->x + x];
+                fall->tetrimino.tetrimino[y][x] != EMPTY
+                ? fall->tetrimino.tetrimino[y][x] : game->board[fall->y + y][fall->x + x];
             game->colors[fall->y + y][fall->x + x] = fall->tetrimino.color;
         }
     fall->x = -1;
@@ -55,7 +54,8 @@ void fall_tetrimino(game_t *game, falling_t *fall)
     }
     for (int y = 0; y < fall->tetrimino.height; y++)
         for (int x = 0; fall->tetrimino.tetrimino[y][x] != '\0'; x++)
-            if (game->board[fall->y + y][fall->x + x] != EMPTY) {
+            if (fall->tetrimino.tetrimino[y][x] != EMPTY
+            && game->board[fall->y + y][fall->x + x] != EMPTY) {
                 stock_tetrimino(game, fall);
                 return;
             }
