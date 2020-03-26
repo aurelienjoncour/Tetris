@@ -19,6 +19,7 @@ static int update_clock(clock_t *time, game_t *game, falling_t *fall)
     > 0) {
         if (!game->pause && fall->x >= 0)
             fall_tetrimino(game, fall);
+        game->stat.timer = *time / 1000;
         print_info(game);
         *time = clock();
     }
