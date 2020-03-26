@@ -55,4 +55,3 @@ int check_full_line(game_t *game)
     }
     return EXIT_SUCCESS;
 }
-
