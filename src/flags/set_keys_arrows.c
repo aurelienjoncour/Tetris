@@ -10,7 +10,7 @@
 
 int set_key_left(char *arg, flags_t *flags)
 {
-    if (arg == NULL)
+    if (arg == NULL || arg[0] == '=')
         return EXIT_ERROR;
     for (int i = 0; flags->left[i] != NULL; i++)
         free(flags->left[i]);
@@ -23,7 +23,7 @@ int set_key_left(char *arg, flags_t *flags)
 
 int set_key_right(char *arg, flags_t *flags)
 {
-    if (arg == NULL)
+    if (arg == NULL || arg[0] == '=')
         return EXIT_ERROR;
     for (int i = 0; flags->right[i] != NULL; i++)
         free(flags->right[i]);
@@ -36,7 +36,7 @@ int set_key_right(char *arg, flags_t *flags)
 
 int set_key_turn(char *arg, flags_t *flags)
 {
-    if (arg == NULL)
+    if (arg == NULL || arg[0] == '=')
         return EXIT_ERROR;
     for (int i = 0; flags->turn[i] != NULL; i++)
         free(flags->turn[i]);
@@ -49,12 +49,12 @@ int set_key_turn(char *arg, flags_t *flags)
 
 int set_key_drop(char *arg, flags_t *flags)
 {
-    if (arg == NULL)
+    if (arg == NULL || arg[0] == '=')
         return EXIT_ERROR;
     for (int i = 0; flags->drop[i] != NULL; i++)
         free(flags->drop[i]);
     free(flags->drop);
-    flags->drop = my_str_to_array(arg, "={};, ", false);
+    flags->drop = my_str_to_array(arg, "{};, ", false);
     if (flags->drop == NULL)
         return EXIT_ERROR;
     return EXIT_SUCCESS;
