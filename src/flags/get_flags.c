@@ -9,12 +9,6 @@
 #include "my.h"
 #include "tetris.h"
 
-typedef struct opt_func_s
-{
-    int (*func)(char *arg, flags_t *flags);
-    int opt;
-} opt_func_t;
-
 const struct option optslong[] = {
     {"help", no_argument, NULL, 'h'},
     {"level", required_argument, NULL, 'L'},

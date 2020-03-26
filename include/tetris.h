@@ -93,6 +93,12 @@ typedef struct game {
 
 typedef int (*input_func_t)(game_t *, falling_t *);
 
+typedef struct opt_func_s
+{
+    int (*func)(char *arg, flags_t *flags);
+    int opt;
+} opt_func_t;
+
 int tetris(int argc, char **argv, char **env);
 void debug_mode(game_t *game);
 char *my_getenv(char const *var, char **env);
