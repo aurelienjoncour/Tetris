@@ -10,7 +10,7 @@
 
 int set_key_quit(char *arg, flags_t *flags)
 {
-    if (arg == NULL)
+    if (arg == NULL || arg[0] == '=')
         return EXIT_ERROR;
     for (int i = 0; flags->quit[i] != NULL; i++)
         free(flags->quit[i]);
@@ -23,7 +23,7 @@ int set_key_quit(char *arg, flags_t *flags)
 
 int set_key_pause(char *arg, flags_t *flags)
 {
-    if (arg == NULL)
+    if (arg == NULL || arg[0] == '=')
         return EXIT_ERROR;
     for (int i = 0; flags->pause[i] != NULL; i++)
         free(flags->pause[i]);

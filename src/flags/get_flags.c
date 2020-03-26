@@ -100,6 +100,14 @@ void free_flags_struct(flags_t *flags)
     free(flags);
 }
 
+static bool valid_arg(int argc, char **argv)
+{
+    for (int i = 1; i < argc; i++)
+        if (argv[i][0] != '-' && argv[i - 1][0] != '-')
+            return false;
+    return true;
+}
+
 flags_t *get_flags(int argc, char **argv, char **env)
 {
     char *term = my_getenv("TERM=", env);
@@ -108,14 +116,14 @@ flags_t *get_flags(int argc, char **argv, char **env)
     int opt = -2;
     int error;
 
-    if (term == NULL || setupterm(term, 1, &error))
+    if (term == NULL || setupterm(term, 1, &error) || !valid_arg(argc, argv))
         return NULL;
     flags = init_flags();
     if (flags == NULL)
         return NULL;
     while (opt != -1) {
         for (int i = 0; opt != -2 && opt_func[i].func != NULL; i++)
-            if ((opt_func[i].opt == opt && opt_func[i].func(argv[optind - 1],
+            if ((opt_func[i].opt == opt && opt_func[i].func(optarg,
             flags) == EXIT_ERROR) || opt == '?')
                 return NULL;
         opt = getopt_long(argc, argv, "hL:l:r:t:d:q:p:s:wD",
