@@ -18,7 +18,7 @@ static int do_first_flags(char *binary, game_t *game)
         free_flags_struct(game->flag);
         if (put_file(binary) == EXIT_ERROR)
             return EXIT_ERROR;
-        return -1;
+        return EXIT_FAILURE;
     }
     if (game->flag->debug)
         debug_mode(game);
@@ -70,7 +70,7 @@ int tetris(int argc, char **argv, char **env)
     }
     exit_value = do_first_flags(argv[0], &game);
     if (exit_value != EXIT_SUCCESS)
-        return exit_value;
+        return exit_value == EXIT_FAILURE ? EXIT_SUCCESS : EXIT_ERROR;
     if (init_term(env))
         return fail_init_term(&game);
     exit_value = play_game(&game);
