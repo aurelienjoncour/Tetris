@@ -142,6 +142,7 @@ int init_tittle(game_t *game);
 void destroy_game(game_t game);
 int get_next(falling_t *fall, game_t *game);
 void fall_tetrimino(game_t *game, falling_t *fall);
+char add_tetri(falling_t fall, game_t *game, int x, int y);
 
 void print_board(falling_t fall, game_t *game);
 void print_info(game_t *game);

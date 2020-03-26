@@ -7,18 +7,18 @@
 
 #include "tetris.h"
 
-static char add_tetri(falling_t fall, game_t *game, int x, int y)
-{
-    if (fall.tetrimino.tetrimino[y][x] == EMPTY)
-        return game->board[fall.y + y][fall.x + x];
-    return fall.tetrimino.tetrimino[y][x];
-}
-
 static char remove_tetri(falling_t fall, game_t *game, int x, int y)
 {
     if (fall.tetrimino.tetrimino[y][x] != EMPTY)
         return EMPTY;
     return game->board[fall.y + y][fall.x + x];
+}
+
+char add_tetri(falling_t fall, game_t *game, int x, int y)
+{
+    if (fall.tetrimino.tetrimino[y][x] == EMPTY)
+        return game->board[fall.y + y][fall.x + x];
+    return fall.tetrimino.tetrimino[y][x];
 }
 
 static void put_falling(falling_t fall, game_t *game, bool put)
@@ -32,7 +32,7 @@ static void put_falling(falling_t fall, game_t *game, bool put)
             game->colors[fall.y + y][fall.x + x] = put ?
                 (fall.tetrimino.tetrimino[y][x] != EMPTY ?
                     fall.tetrimino.color : game->colors[fall.y + y][fall.x + x])
-                : EMPTY_COLOR;
+                : game->colors[fall.y + y][fall.x + x];
         }
 }
 
