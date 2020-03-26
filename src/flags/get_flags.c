@@ -121,8 +121,8 @@ flags_t *get_flags(int argc, char **argv, char **env)
         return NULL;
     while (opt != -1) {
         for (int i = 0; opt != -2 && opt_func[i].func != NULL; i++)
-            if (opt_func[i].opt == opt
-            && opt_func[i].func(argv[optind - 1], flags) == EXIT_ERROR)
+            if ((opt_func[i].opt == opt && opt_func[i].func(argv[optind - 1],
+            flags) == EXIT_ERROR) || opt == '?')
                 return NULL;
         opt = getopt_long(argc, argv, "hL:l:r:t:d:q:p:s:wD",
                         optslong, &optsindex);
