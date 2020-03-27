@@ -38,8 +38,9 @@ static void put_falling(falling_t fall, game_t *game, bool put)
 
 void print_board(falling_t fall, game_t *game)
 {
+    wclear(game->wins.game);
+    box(game->wins.game, ACS_VLINE, ACS_HLINE);
     put_falling(fall, game, true);
-    clear();
     for (int j = 0; j < game->flag->map_size[0]; j++) {
         for (int i = 0; i < game->flag->map_size[1]; i++) {
             wattron(game->wins.game, COLOR_PAIR(game->colors[j][i]));

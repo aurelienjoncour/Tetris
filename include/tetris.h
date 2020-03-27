@@ -140,13 +140,13 @@ int init_stat(game_t *game);
 int init_next(game_t *game);
 int init_tittle(game_t *game);
 void destroy_game(game_t game);
-int get_next(falling_t *fall, game_t *game);
+int get_next(falling_t *fall, game_t *game, tetrimino_t *new_tetri);
 void fall_tetrimino(game_t *game, falling_t *fall);
 char add_tetri(falling_t fall, game_t *game, int x, int y);
 
 void print_board(falling_t fall, game_t *game);
 void print_info(game_t *game);
-void print_next(game_t *game);
+void print_next(game_t *game, tetrimino_t next_tetri);
 void print_tittle(game_t *game);
 
 int rotate_2(tetrimino_t *tetriminos, int index, char **copy);
