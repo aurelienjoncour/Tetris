@@ -36,13 +36,11 @@ static void display_tetriminos(tetrimino_t *tetriminos, int nb)
 
 static void print_key(char *key)
 {
-    if (!my_strcmp(key, " ")) {
-        my_putstr("(space)\n");
-        return;
-    }
     for (int i = 0; key[i]; i++) {
         if (key[i] == 27)
             my_putstr("^E");
+        else if (key[i] == ' ')
+            my_putstr("(space)");
         else
             my_putchar(key[i]);
     }
