@@ -76,15 +76,17 @@ void print_info(game_t *game)
 
 void print_next(game_t *game, tetrimino_t next_tetri)
 {
-    wclear(game->wins.next);
-    box(game->wins.next, ACS_VLINE, ACS_HLINE);
-    wattron(game->wins.next, COLOR_PAIR(next_tetri.color));
-    for (int y = 0; y < next_tetri.height; y++)
-        mvwprintw(game->wins.next, 10 / 2 - next_tetri.height / 2 + y,
-                28 / 2 - next_tetri.width  / 2, "%s", next_tetri.tetrimino[y]);
-    wattroff(game->wins.next, COLOR_PAIR(next_tetri.color));
-    mvwprintw(game->wins.next, 0, 10, "Next");
-    wrefresh(game->wins.next);
+    if (game->flag->without_next) {
+        wclear(game->wins.next);
+        box(game->wins.next, ACS_VLINE, ACS_HLINE);
+        wattron(game->wins.next, COLOR_PAIR(next_tetri.color));
+        for (int y = 0; y < next_tetri.height; y++)
+            mvwprintw(game->wins.next, 10 / 2 - next_tetri.height / 2 + y,
+            28 / 2 - next_tetri.width  / 2, "%s", next_tetri.tetrimino[y]);
+        wattroff(game->wins.next, COLOR_PAIR(next_tetri.color));
+        mvwprintw(game->wins.next, 0, 10, "Next");
+        wrefresh(game->wins.next);
+    }
 }
 
 static void print_tittle_1(game_t *game)
