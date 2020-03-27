@@ -60,14 +60,14 @@ int tetris(int argc, char **argv, char **env)
     game_t game = {};
     int exit_value;
 
-    if (create_tetriminos("./tetriminos/", &game) == EXIT_ERROR)
-        return EXIT_ERROR;
     game.flag = get_flags(argc, argv, env);
     if (game.flag == NULL) {
         put_file(argv[0]);
-        destroy_game(game);
+        free_flags_struct(game.flag);
         return EXIT_ERROR;
     }
+    if (create_tetriminos("./tetriminos/", &game) == EXIT_ERROR)
+        return EXIT_ERROR;
     exit_value = do_first_flags(argv[0], &game);
     if (exit_value != EXIT_SUCCESS)
         return exit_value == EXIT_FAILURE ? EXIT_SUCCESS : EXIT_ERROR;
