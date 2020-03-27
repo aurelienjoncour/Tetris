@@ -12,8 +12,10 @@ int move_tetri_left(game_t *game, falling_t *fall)
 {
     if (game->pause)
         return EXIT_SUCCESS;
-    if (fall->x > 0)
-        fall->x--;
+    if (fall->x > 0) {
+        if (!check_hitbox_l(game, fall))
+            fall->x--;
+    }
     print_board(*fall, game);
     return EXIT_SUCCESS;
 }
@@ -22,8 +24,11 @@ int move_tetri_right(game_t *game, falling_t *fall)
 {
     if (game->pause)
         return EXIT_SUCCESS;
-    if (fall->x + fall->tetrimino.width < game->flag->map_size[1])
-        fall->x++;
+    if (fall->x + fall->tetrimino.width < game->flag->map_size[1]) {
+        if (!check_hitbox_r(game, fall))
+            fall->x++;
+    }
+    game->stat.score = fall->x;
     print_board(*fall, game);
     return EXIT_SUCCESS;
 }

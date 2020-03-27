@@ -168,4 +168,7 @@ int game_pause(game_t *game, __attribute((unused))falling_t *fall);
 int game_quit(__attribute((unused))game_t *game,
             __attribute((unused))falling_t *fall);
 
+int check_hitbox_r(game_t *game, falling_t *fall);
+int check_hitbox_l(game_t *game, falling_t *fall);
+
 #endif

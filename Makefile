@@ -61,6 +61,7 @@ SRC =   src/main.c								\
 		src/inputs/move_tetriminos.c			\
 		src/inputs/game_inputs.c				\
 		src/inputs/rotation_tetrimino.c			\
+		src/inputs/check_valid_move.c			\
 
 OBJ =   $(SRC:.c=.o)
 
