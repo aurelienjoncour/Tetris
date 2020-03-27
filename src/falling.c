@@ -34,6 +34,7 @@ int get_next(falling_t *fall, game_t *game)
 
 static void stock_tetrimino(game_t *game, falling_t *fall)
 {
+    game->stat.score += 2;
     fall->y--;
     for (int y = 0; y < fall->tetrimino.height; y++)
         for (int x = 0; fall->tetrimino.tetrimino[y][x] != '\0'; x++) {

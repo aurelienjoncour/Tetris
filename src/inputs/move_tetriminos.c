@@ -28,7 +28,6 @@ int move_tetri_right(game_t *game, falling_t *fall)
         if (!check_hitbox_r(game, fall))
             fall->x++;
     }
-    game->stat.score = fall->x;
     print_board(*fall, game);
     return EXIT_SUCCESS;
 }
