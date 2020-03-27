@@ -102,6 +102,11 @@ void free_flags_struct(flags_t *flags)
 
 static bool valid_arg(int argc, char **argv)
 {
+    for (int i = 1; i < argc - 1; i++) {
+        if (argv[i][0] == '-' && my_strlen(argv[i]) > 2  && argv[i][1] != '-'
+            && argv[i+1][0] != '-')
+            return false;
+    }
     for (int i = 1; i < argc; i++)
         if (argv[i][0] != '-' && argv[i - 1][0] != '-')
             return false;
