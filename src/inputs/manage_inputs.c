@@ -49,7 +49,7 @@ int get_inputs(game_t *game, falling_t *fall)
     ssize_t read_size = read(0, &buffer, 10);
 
     if (read_size == -1)
-        return EXIT_ERROR;
+        return 0;
     buffer[read_size] = '\0';
     return apply_inputs(buffer, game, fall);
 }
