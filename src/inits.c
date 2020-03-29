@@ -69,6 +69,16 @@ int init_boards(game_t *game)
 
 int init_all_window(game_t *game)
 {
+    char *msg = "Enlarge your terminal please\n";
+
+    while (LINES < game->flag->map_size[1] || LINES < 30
+        || COLS < 32 + game->flag->map_size[1]) {
+        clear();
+        mvprintw(LINES / 2, COLS / 2 - my_strlen(msg) / 2, msg);
+        refresh();
+    }
+    clear();
+    refresh();
     if (init_wins(game) == EXIT_ERROR)
         return EXIT_ERROR;
     if (init_stat(game) == EXIT_ERROR)
