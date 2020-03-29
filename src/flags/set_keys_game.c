@@ -10,7 +10,7 @@
 
 int set_key_quit(char *arg, flags_t *flags)
 {
-    if (arg == NULL || arg[0] == '=')
+    if (arg == NULL || arg[0] == '=' || !my_strlen(arg))
         return EXIT_ERROR;
     for (int i = 0; flags->quit[i] != NULL; i++)
         free(flags->quit[i]);
@@ -27,7 +27,7 @@ int set_key_quit(char *arg, flags_t *flags)
 
 int set_key_pause(char *arg, flags_t *flags)
 {
-    if (arg == NULL || arg[0] == '=')
+    if (arg == NULL || arg[0] == '=' || !my_strlen(arg))
         return EXIT_ERROR;
     for (int i = 0; flags->pause[i] != NULL; i++)
         free(flags->pause[i]);
@@ -46,7 +46,7 @@ int set_map_size(char *arg, flags_t *flags)
 {
     char **array = my_str_to_array(arg, "{};, ", false);
 
-    if (arg == NULL || array == NULL)
+    if (arg == NULL || array == NULL || !my_strlen(arg))
         return EXIT_ERROR;
     for (int i = 0; i < 2; i++)
         if (array[i] == NULL)
