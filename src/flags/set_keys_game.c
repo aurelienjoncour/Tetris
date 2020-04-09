@@ -15,12 +15,8 @@ int set_key_quit(char *arg, flags_t *flags)
     for (int i = 0; flags->quit[i] != NULL; i++)
         free(flags->quit[i]);
     free(flags->quit);
-    flags->quit = malloc(sizeof(char *) * 2);
+    flags->quit = my_str_to_array(arg, ";, ", false);
     if (flags->quit == NULL)
-        return EXIT_ERROR;
-    flags->quit[0] = my_strdup(arg);
-    flags->quit[1] = NULL;
-    if (flags->quit[0] == NULL)
         return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
@@ -32,12 +28,8 @@ int set_key_pause(char *arg, flags_t *flags)
     for (int i = 0; flags->pause[i] != NULL; i++)
         free(flags->pause[i]);
     free(flags->pause);
-    flags->pause = malloc(sizeof(char *) * 2);
+    flags->pause = my_str_to_array(arg, ";, ", false);
     if (flags->pause == NULL)
-        return EXIT_ERROR;
-    flags->pause[0] = my_strdup(arg);
-    flags->pause[1] = NULL;
-    if (flags->pause[0] == NULL)
         return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
